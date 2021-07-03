@@ -1,0 +1,10 @@
+{
+  "prefix": "!",
+  "token": "MzU5MzUxNjg3NDUxNzcwODgz.Wb_eVg.L9-mncSfr0Bz2U6Ljmy9fhubl3o",
+  "owners": [
+    "301931016422162445"
+  ],
+  "welcome": "675744029903945755",
+  "log": "675744029903945755",
+  "mongodb":"mongodb://localhost:27017/AlitaBot"
+}
