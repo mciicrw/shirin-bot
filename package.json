@@ -1,0 +1,26 @@
+{
+  "name": "botjs",
+  "version": "1.0.0",
+  "description": "just bot",
+  "main": "src/index.js",
+  "author": "Shirin",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.17.0",
+    "eslint-config-tesseract": "^0.0.3"
+  },
+  "dependencies": {
+    "canvas": "^2.7.0",
+    "diff": "^5.0.0",
+    "discord.js": "^12.5.1",
+    "glob": "^7.1.6",
+    "moment": "^2.29.1",
+    "mongoose": "^5.11.16",
+    "ms": "^2.1.3",
+    "node-fetch": "^2.6.1",
+    "path": "^0.12.7",
+    "sequelize": "^6.6.2",
+    "sqlite3": "^5.0.2",
+    "util": "^0.12.3"
+  }
+}

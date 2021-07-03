@@ -1,0 +1,9 @@
+{
+    "prefix": "!",
+    "token": "your-bot-token",
+    "owners": [
+      "your-discord-id"
+    ],
+    "welcome": "no-channel-specified",
+    "log": "no-channel-specified"
+  }
