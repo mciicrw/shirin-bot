@@ -4,6 +4,9 @@ const { promisify } = require('util');
 const glob = promisify(require('glob'));
 const Command = require('./Command.js');
 const Event = require('./Event.js');
+// const sqlite = require('sqlite3');
+// const Fs = require('fs');
+// const { exists } = require('fs');
 // const config = require('../../config.json');
 // const mongoose = require('mongoose');
 // const DBLoader = require('./Database.js');
@@ -24,7 +27,7 @@ module.exports = class Util {
 		return `${path.dirname(require.main.filename)}${path.sep}`;
 	}
 
-	trimArray(arr, maxLen = 10) {
+	trimArray(arr, maxLen = 5) {
 		if (arr.length > maxLen) {
 			const len = arr.length - maxLen;
 			arr = arr.slice(0, maxLen);
@@ -82,22 +85,14 @@ module.exports = class Util {
 		});
 	}
 
-	// async loadDatabase() {
-
+	// async checkDB() {
+	// 	const dbloc = path.join(__dirname, '..', 'Database', 'testdb.sqlite');
+	// 	try {
+	// 		await Fs.access(dbloc);
+	// 		return console.log('db exists');
+	// 	} catch {
+	// 		return console.log('db nonexistent, creating one');
+	// 	}
 	// }
-	/*
-		async dbHandlerLoad() {
-		return glob(`${this.directory}Database/**//* .js`).then(dbLoaders =>{
-			for(const loaderFile of dbLoaders){
-				delete require.cache[loaderFile];
-				const { name } = path.parse(eventFile);
-				const File = require(loaderFile);
-				if (!this.isClass(File)) throw new TypeError(`Loader ${name} doesn't export a class!`);
-				const dbLoader = new File(this.client, name);
-				if (!(dbLoader instanceof DBLoader)) throw new TypeError(`Loader ${name} doesn't belong in the Database directory`);
-			}
-		})
-	}
-	*/
 
 };

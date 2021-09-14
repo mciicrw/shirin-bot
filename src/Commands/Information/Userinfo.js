@@ -37,28 +37,29 @@ module.exports = class extends Command {
 			.sort((a, b) => b.position - a.position)
 			.map(role => role.toString())
 			.slice(0, -1);
+		const presence = member.user.presence.activities.length < 1 ?
+			null : member.user.presence.activities.length > 1 ?
+				member.user.presence.activities[1].name : member.user.presence.activities[0].name === 'Custom Status' ?
+					null : member.user.presence.activities[0].name;
 		const userFlags = member.user.flags.toArray();
 		const userEmbed = new MessageEmbed()
 			.setColor(member.displayHexColor || 3066993)
 			.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setTitle(`:memo: | ${member.user.tag}'s profile`)
 			.addField(':mag_right: | User', [
-				`**~❯ Username:** ${member.user.username}`,
-				`**~❯ Discriminator:** ${member.user.discriminator}`,
 				`**~❯ ID:** ${member.id}`,
 				`**~❯ Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
 				`**~❯ Avatar:** [Link to avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
-				`**~❯ Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
+				`**~❯ Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} (${moment(member.user.createdTimestamp).fromNow()})`,
 				`**~❯ Status:** ${member.user.presence.status}`,
-				`**~❯ ID:** ${member.id}`,
-				`**~❯ Game:** ${member.user.presence.game || `Currently not playing any game`}`,
+				`**~❯ Game:** ${presence || `Currently not playing any game`}`,
 				'\u200b'
 			])
 			.addField(':mag_right: | Member', [
+				`**~❯ Server Nickname:** ${member.displayName}`,
 				`**~❯ Highest Role:** ${member.roles.highest.id === message.guild.id ? 'none' : member.roles.highest.name}`,
 				`**~❯ Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
-				`**~❯ Hoist Role:** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
-				`**~❯ Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
+				`**~❯ Roles [${roles.length}]:** ${roles.length < 5 ? roles.join(', ') : roles.length > 5 ? this.client.utils.trimArray(roles) : 'None'}`,
 				'\u200b'
 			])
 			.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))

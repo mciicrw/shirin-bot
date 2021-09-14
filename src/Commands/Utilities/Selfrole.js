@@ -8,7 +8,7 @@ module.exports = class extends Command {
 			aliases: ['iam'],
 			description: 'Add a role of choice by yourself',
 			usage: `${prefix}iam <role>`,
-			category: 'Utilites'
+			category: 'Utilities'
 		});
 	}
 

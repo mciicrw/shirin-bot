@@ -1,5 +1,5 @@
 const Event = require('../../Structures/Event.js');
-const MenuDocsEmbed = require('../../Structures/MenuDocsEmbed.js');
+const BotEmbed = require('../../Structures/BotEmbed.js');
 const { Util: { escapeMarkdown } } = require('discord.js');
 const { diffWordsWithSpace } = require('diff');
 
@@ -8,7 +8,7 @@ module.exports = class extends Event {
 	async run(old, message) {
 		if (!message.guild || old.content === message.content || message.author.bot) return;
 
-		const embed = new MenuDocsEmbed()
+		const embed = new BotEmbed()
 			.setColor(3066993)
 			.setAuthor(old.author.tag, this.client.user.displayAvatarURL({ dynamic: true }))
 			.setTitle('Message Updated')

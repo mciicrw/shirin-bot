@@ -82,10 +82,12 @@ module.exports = class extends Command {
 				`:red_circle: **Do Not Disturb:** ${members.filter(member => member.presence.status === 'dnd').size}`,
 				`:black_circle: **Offline:** ${members.filter(member => member.presence.status === 'offline').size}`,
 				'\u200b'
-			])
-			.addField(`:speech_left: | Roles [${roles.length - 1}]`, roles.length <= 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None')
+			], true)
+			.addField(`:speech_left: | Roles [${roles.length - 1}]`, roles.length <= 5 ? roles.join(', ') : roles.length > 5 ? this.client.utils.trimArray(roles) : 'None', true)
 			.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
 			.setTimestamp();
+		if (message.guild.banner) embed.setImage(message.guild.bannerURL({"format":"png"}));
+		// console.log(message.guild.banner);
 		message.channel.send(embed);
 	}
 

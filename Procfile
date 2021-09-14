@@ -1,1 +1,1 @@
-bot: node .
+worker: node .

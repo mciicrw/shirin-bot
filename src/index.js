@@ -1,6 +1,6 @@
-const MenuDocsClient = require('./Structures/MenuDocsClient');
+const BotClient = require('./Structures/BotClient');
 const config = require('../config.json');
 
-const client = new MenuDocsClient(config);
+const client = new BotClient(config);
 client.start();
 

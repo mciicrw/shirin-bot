@@ -10,3 +10,5 @@ Role.js
 Join.js
 # Stress.js
 Models
+Database
+.env

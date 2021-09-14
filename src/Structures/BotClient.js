@@ -1,7 +1,11 @@
 const { Client, Collection } = require('discord.js');
 const Util = require('./Util.js');
+// const MPrefix = require('../Models/Prefix');
+require('dotenv/config');
 
-module.exports = class MenuDocsClient extends Client {
+
+module.exports = class BotClient extends Client {
+
 
 	constructor(options = {}) {
 		super({
@@ -39,22 +43,35 @@ module.exports = class MenuDocsClient extends Client {
 			}
 		}); */
 	}
-
+/*
+	async getPref() {
+		const dbpref = await MPrefix.findOne({
+			where: {
+				guildId: guildid
+			}
+		});
+		return dbpref;
+	}
+	*/
 	validate(options) {
 		if (typeof options !== 'object') throw new TypeError('Options should be an Object');
 
-		if (!options.token) throw new Error('You must pass the token for the client!');
-		this.token = options.token;
+		// if (!options.token) throw new Error('You must pass the token for the client!');
+		// this.token = options.token;
+		// eslint-disable-next-line no-process-env
+		// this.token = process.env.PROD_TOKEN;
+		this.token = process.env.DEPLOY === 'DEV' ? process.env.DEV_TOKEN : process.env.PROD_TOKEN;
 
 		if (!options.prefix) throw new Error('You must pass the prefix for the client!');
 		if (typeof options.prefix !== 'string') throw new Error('Prefix should be a type of String');
-		this.prefix = options.prefix;
+		// const serverPrev = this.getPref();
+		this.prefix = process.env.DEPLOY === 'DEV' ? options.devPrefix : options.prefix;
 	}
 
 	async start(token = this.token) {
 		this.utils.loadCommands();
 		this.utils.loadEvents();
-		// this.utils.loadDatabase();
+		// this.utils.checkDB();
 		super.login(token);
 	}
 

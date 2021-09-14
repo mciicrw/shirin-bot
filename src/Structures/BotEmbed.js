@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 
 const ZWS = '\u200b';
 
-module.exports = class MenuDocsaEmbed extends MessageEmbed {
+module.exports = class BotEmbed extends MessageEmbed {
 
 	splitFields(contentOrTitle, rawContent) {
 		if (typeof contentOrTitle === 'undefined') return this;

@@ -1,12 +1,12 @@
 const Event = require('../../Structures/Event.js');
-const MenuDocsEmbed = require('../../Structures/MenuDocsEmbed.js');
+const BotEmbed = require('../../Structures/BotEmbed.js');
 
 module.exports = class extends Event {
 
 	async run(message) {
 		if (!message.guild || message.author.bot) return;
 		const attachments = message.attachments.size ? message.attachments.map(attachment => attachment.proxyURL) : null;
-		const embed = new MenuDocsEmbed()
+		const embed = new BotEmbed()
 			.setColor(3066993)
 			.setAuthor(message.author.tag, this.client.user.displayAvatarURL({ dynamic: true }))
 			.setTitle('Message Deleted')
