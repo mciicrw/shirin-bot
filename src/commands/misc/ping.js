@@ -1,8 +1,8 @@
-module.exports = class Ping extends Command {
+module.exports = class PingOld extends Command {
     constructor() {
         super({
-            name: "ping",
-            aliases: ["pong"],
+            name: "pingold",
+            aliases: ["pongold"],
             description: "Ping command",
             usage: "",
             category: "Misc",

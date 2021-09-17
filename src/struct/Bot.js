@@ -1,6 +1,9 @@
 const { Client, Collection, Intents } = require('discord.js');
 const { resolve } = require('path');
 const { sync } = require('glob');
+const config = require('../../config.json');
+const Util = require('../utils/Utility');
+const Scheduled = require('../utils/Scheduled');
 
 require('./Interaction');
 require('./Command');
@@ -14,14 +17,16 @@ module.exports = class Bot extends Client {
                 repliedUser: false,
             },
         });
-        this.prefix = process.env.PREFIX;
+        this.prefix = process.env.DEPLOY ==='DEV' ? config.devPrefix : config.prefix;
         this.cooldowns = new Collection();
         this.commands = new Collection();
         this.events = new Collection();
         this.aliases = new Collection();
-        this.owners = ["280045641604792322"];
+        this.owners = config.owners;
         this.logger = require('../utils/Logger');
         this.interactions = new Collection();
+        this.utils = new Util(this);
+        this.schedule = new Scheduled(this);
     }
 
     // Load slash commands
