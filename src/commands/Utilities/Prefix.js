@@ -1,11 +1,9 @@
-
 const fs = require('fs').promises;
 const { prefix } = require('../../../config.json');
 require('dotenv/config');
 
 
 module.exports = class BotPrefix extends Command {
-
 	constructor() {
 		super({
             name: "prefix",

@@ -1,0 +1,105 @@
+/**
+ * List of emoji object and array
+ */
+
+
+const rarity = ['⭐','⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐']
+
+const element = {
+    "Cryo": {
+        emoji: "<:Element_Cryo:888263635854569482>",
+        color: '#99FFFF'
+    },
+    "Anemo": {
+        emoji: "<:Element_Anemo:888263636211097670>",
+        color: '#80FFD7'
+    },
+    "Geo": {
+        emoji: "<:Element_Geo:888263637330976768>",
+        color: '#FFE699'
+    },
+    "Electro": {
+        emoji: "<:Element_Electro:888263636764733500>",
+        color: '#FFACFF'
+    },
+    "Pyro": {
+        emoji: "<:Element_Pyro:888263633648353360>",
+        color: '#FF9999'
+    },
+    "Hydro": {
+        emoji: "<:Element_Hydro:888263634344624149>",
+        color: '#80C0FF'
+    },
+    "Dendro": {
+        emoji: "<:Element_Dendro:888263638199197726>",
+        color: '#b2ea2a'
+    }
+}
+
+const rotationData = [
+    {
+        day: "Sunday",
+        image: "./src/img/sunday.png",
+        mats: "Everything",
+        talent: "Every talent and ascension material opened today\nYou can farm any domain that you need",
+        imgtlt: "",
+        imgmats:"",
+        imgname: ["sunday.png","sunday-mats.png","sunday-talent.png"]
+    },
+    {
+        day: "Monday",
+        image: "./src/img/monday.png",
+        mats: "**Mondstadt**: Decarabian\n**Liyue**: Guyun\n**Inazuma**: Distant Sea",
+        talent: "**Mondstadt**: Freedom\n**Liyue**: Prosperity\n**Inazuma**: Transience",
+        imgtlt: "",
+        imgmats:"",
+        imgname: ["monday.png","monday-mats.png","monday-talent.png"]
+    },
+    {
+        day: "Tuesday",
+        image: "./src/img/tuesday.png",
+        mats: "**Mondstadt**: Boreal\n**Liyue**: Elixir\n**Inazuma**: Narukami",
+        talent: "**Mondstadt**: Resistance\n**Liyue**: Diligence\n**Inazuma**: Elegance",
+        imgtlt: "",
+        imgmats:"",
+        imgname: ["tuesday.png","tuesday-mats.png","tuesday-talent.png"]
+    },
+    {
+        day: "Wednesday",
+        image: "./src/img/wednesday.png",
+        mats: "**Mondstadt**: Dandelion\n**Liyue**: Aerosiderite\n**Inazuma**: Mask",
+        talent: "**Mondstadt**: Ballad\n**Liyue**: Gold\n**Inazuma**: Light",
+        imgtlt: "",
+        imgmats:"",
+        imgname: ["wednesday.png","wednesday-mats.png","wednesday-talent.png"]
+    },
+    {
+        day: "Thursday",
+        image: "./src/img/monday.png",
+        mats: "**Mondstadt**: Decarabian\n**Liyue**: Guyun\n**Inazuma**: Distant Sea",
+        talent: "**Mondstadt**: Freedom\n**Liyue**: Prosperity\n**Inazuma**: Transience",
+        imgtlt: "",
+        imgmats:"",
+        imgname: ["monday.png","monday-mats.png","monday-talent.png"]
+    },
+    {
+        day: "Friday",
+        image: "./src/img/tuesday.png",
+        mats: "**Mondstadt**: Boreal\n**Liyue**: Elixir\n**Inazuma**: Narukami",
+        talent: "**Mondstadt**: Resistance\n**Liyue**: Diligence\n**Inazuma**: Elegance",
+        imgtlt: "",
+        imgmats:"",
+        imgname: ["tuesday.png","tuesday-mats.png","tuesday-talent.png"]
+    },
+    {
+        day: "Saturday",
+        image: "./src/img/wednesday.png",
+        mats: "**Mondstadt**: Dandelion\n**Liyue**: Aerosiderite\n**Inazuma**: Mask",
+        talent: "**Mondstadt**: Ballad\n**Liyue**: Gold\n**Inazuma**: Light",
+        imgtlt: "",
+        imgmats:"",
+        imgname: ["wednesday.png","wednesday-mats.png","wednesday-talent.png"]
+    }
+]
+
+module.exports = { rarity, element, rotationData }

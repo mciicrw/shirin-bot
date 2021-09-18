@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = class SlashPing extends Interaction {
     constructor() {
         super({
@@ -6,9 +8,10 @@ module.exports = class SlashPing extends Interaction {
         });
     }
     async exec(interaction) {
+        const msg = interaction.reply('pinging')
 
-        const latency = msg.createdTimestamp - message.createdTimestamp;
-		const pingEmbed = new Discord.MessageEmbed()
+        const latency = msg.createdTimestamp - interaction.createdTimestamp;
+		const pingEmbed = new MessageEmbed()
 			.setColor(4568450)
 			.setTitle(':ping_pong: Pong!')
 			.addFields(
@@ -16,6 +19,6 @@ module.exports = class SlashPing extends Interaction {
 				{ name: 'Roundtrip', value: `${latency} ms` }
 			);
 
-        return interaction.reply({ ephemeral: true, embeds: [pingEmbed]})
+        return interaction.editReply({ ephemeral: true, embeds: [pingEmbed]})
     }
 }

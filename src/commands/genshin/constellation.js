@@ -1,5 +1,5 @@
 const genshin = require('genshin-db');
-const { MessageEmbed } = require('discord.js');
+const botEmbed = require('../../utils/EmbedBuilder');
 const { prefix } = require('../../../config.json');
 
 module.exports = class Conste extends Command {
@@ -22,9 +22,12 @@ module.exports = class Conste extends Command {
 
         await message.channel.sendTyping();
         const charCons = genshin.constellations(args[0]);
+        const charDetails = genshin.characters(args[0]);
 
-        const consteEmbed = new MessageEmbed()
-        .setTitle(`${charCons.name}'s Constellation`)
+        console.log(charDetails.element)
+        const consteEmbed = new botEmbed()
+        .addGenshinDetails(args[0])
+        .addField(`Constellation`,'\u200b')
         .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
 	    .setTimestamp();
 
