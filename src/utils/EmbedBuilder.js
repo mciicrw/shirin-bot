@@ -13,7 +13,7 @@ module.exports = class botEmbed extends MessageEmbed {
         this.title = charDetails.name
         this.thumbnail = {url: charDetails.images.icon}
         this.description = [
-            `${emobjects.element[charDetails.element].emoji} | ${emobjects.raritynoji[charDetails.rarity-1]}`,
+            `${emobjects.element[charDetails.element].emoji} | ${emobjects.raritymoji[charDetails.rarity-1]}`,
             charDetails.description
         ].join('\n')
 
