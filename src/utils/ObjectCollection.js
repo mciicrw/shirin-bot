@@ -134,6 +134,10 @@ const arteDomain = [
     {
         name: "Momiji-Dyed Court",
         list: ["Resolution of Sojourner", "Tiny Miracle", "Emblem of Severed Fate", "Shimenawa's Reminiscence"]
+    },
+    {
+        name: "Trounce Domain & World Boss",
+        list: ["Berseker", "Instructor", "The Exile", "Gladiator's Finale", "Wanderer's Troupe"]
     }
 ]
 
