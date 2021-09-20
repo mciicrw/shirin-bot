@@ -33,7 +33,7 @@ module.exports = class Arte extends Command {
 
         const arteSource = arteDomain.filter( domain => domain.list.find(arte => arte === arteDetails.name))
 
-        if(arteDetails.name.includes('prayers')) {
+        if(arteDetails.name.includes('Prayers')) {
             const arteEmbed = new botEmbed()
             .setColor(message.guild.me.displayHexColor)
             .setTitle(arteDetails.name)
@@ -43,7 +43,7 @@ module.exports = class Arte extends Command {
                 {name:"1 Set Effect", value: arteDetails['1pc'], inline:true},
                 {name:"Location", value: arteSource[0].name, inline:false}
             ])
-        return message.reply({embeds:[arteEmbed]})
+            return message.reply({embeds:[arteEmbed]})
         }
 
         const arteEmbed = new botEmbed()
