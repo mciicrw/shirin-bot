@@ -19,7 +19,9 @@ module.exports = class Arte extends Command {
 
     async exec(message, args){
         if (args.length == 0) {
-            const arteList = genshin.artifacts('4',{matchCategories: true});
+            const arteListFarm = genshin.artifacts('4',{matchCategories: true});
+            const arteListFod = genshin.artifacts('2',{matchCategories: true});
+            const arteList = arteListFarm.concat(arteListFod);
 
             const listEmbed = new botEmbed()
                 .setColor(message.guild.me.displayHexColor)
