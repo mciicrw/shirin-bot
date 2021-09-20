@@ -3,7 +3,7 @@
  */
 
 
-const rarity = ['⭐','⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐']
+const raritymoji = ['⭐','⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐']
 
 const element = {
     "Cryo": {
@@ -39,7 +39,7 @@ const element = {
 const rotationData = [
     {
         day: "Sunday",
-        image: "./src/img/sunday.png",
+        image: "./src/assets/img/sunday.png",
         mats: "Everything",
         talent: "Every talent and ascension material opened today\nYou can farm any domain that you need",
         imgtlt: "",
@@ -48,7 +48,7 @@ const rotationData = [
     },
     {
         day: "Monday",
-        image: "./src/img/monday.png",
+        image: "./src/assets/img/monday.png",
         mats: "**Mondstadt**: Decarabian\n**Liyue**: Guyun\n**Inazuma**: Distant Sea",
         talent: "**Mondstadt**: Freedom\n**Liyue**: Prosperity\n**Inazuma**: Transience",
         imgtlt: "",
@@ -57,7 +57,7 @@ const rotationData = [
     },
     {
         day: "Tuesday",
-        image: "./src/img/tuesday.png",
+        image: "./src/assets/img/tuesday.png",
         mats: "**Mondstadt**: Boreal\n**Liyue**: Elixir\n**Inazuma**: Narukami",
         talent: "**Mondstadt**: Resistance\n**Liyue**: Diligence\n**Inazuma**: Elegance",
         imgtlt: "",
@@ -66,7 +66,7 @@ const rotationData = [
     },
     {
         day: "Wednesday",
-        image: "./src/img/wednesday.png",
+        image: "./src/assets/img/wednesday.png",
         mats: "**Mondstadt**: Dandelion\n**Liyue**: Aerosiderite\n**Inazuma**: Mask",
         talent: "**Mondstadt**: Ballad\n**Liyue**: Gold\n**Inazuma**: Light",
         imgtlt: "",
@@ -75,7 +75,7 @@ const rotationData = [
     },
     {
         day: "Thursday",
-        image: "./src/img/monday.png",
+        image: "./src/assets/img/monday.png",
         mats: "**Mondstadt**: Decarabian\n**Liyue**: Guyun\n**Inazuma**: Distant Sea",
         talent: "**Mondstadt**: Freedom\n**Liyue**: Prosperity\n**Inazuma**: Transience",
         imgtlt: "",
@@ -84,7 +84,7 @@ const rotationData = [
     },
     {
         day: "Friday",
-        image: "./src/img/tuesday.png",
+        image: "./src/assets/img/tuesday.png",
         mats: "**Mondstadt**: Boreal\n**Liyue**: Elixir\n**Inazuma**: Narukami",
         talent: "**Mondstadt**: Resistance\n**Liyue**: Diligence\n**Inazuma**: Elegance",
         imgtlt: "",
@@ -93,7 +93,7 @@ const rotationData = [
     },
     {
         day: "Saturday",
-        image: "./src/img/wednesday.png",
+        image: "./src/assets/img/wednesday.png",
         mats: "**Mondstadt**: Dandelion\n**Liyue**: Aerosiderite\n**Inazuma**: Mask",
         talent: "**Mondstadt**: Ballad\n**Liyue**: Gold\n**Inazuma**: Light",
         imgtlt: "",
@@ -102,4 +102,40 @@ const rotationData = [
     }
 ]
 
-module.exports = { rarity, element, rotationData }
+const arteDomain = [
+    {
+        name: "Midsummer Courtyard",
+        list: ["Adventurer", "Resolution of Sojourner", "Thundering Fury", "Thundershooter"]
+    },
+    {
+        name: "Valley of Rememberance",
+        list: ["Traveling Doctor", "Tiny Miracle", "Viridescent Venerer", "Maiden Beloved"]
+    },
+    {
+        name: "Domain of Guyun",
+        list: ["Lucky Dog", "Brave Heart", "Archaic Petra", "Retracting Bolide"]
+    },
+    {
+        name: "Hidden Palace of Zhou Formula",
+        list: ["Martial Artist", "Defender's Will", "Lavawalker", "Crimson Witch of Flames"]
+    },
+    {
+        name: "Clear Pool and Mountain Cavern",
+        list: ["Gambler", "Scholar", "Noblesse Oblige", "Bloodstained Chivalry"]
+    },
+    {
+        name: "Peak of Vindagnyr",
+        list: ["Defender's Will", "Gambler", "Blizzard Strayer", "Heart of Depth"]
+    },
+    {
+        name: "Ridge Watch",
+        list: ["Brave Heart", "Martial Artist", "Tenacity of the Millelith", "Pale Flame"]
+    },
+    {
+        name: "Momiji-Dyed Court",
+        list: ["Resolution of Sojourner", "Tiny Miracle", "Emblem of Severed Fate", "Shimenawa's Reminiscence"]
+    }
+]
+
+
+module.exports = { raritymoji, element, rotationData, arteDomain }

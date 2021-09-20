@@ -26,19 +26,19 @@ module.exports = class StressMan extends Command {
 		if (tipe === 'halu') {
 			const waifu = args[1];
 			if (!waifu) return message.channel.send('Please pass waifu name to be halucinated');
-			const haluText = fs.readFileSync('./src/Text/halu.txt', 'utf8');
+			const haluText = fs.readFileSync('./src/assets/text/halu.txt', 'utf8');
 			const replace = haluText.replace(/(?:^|)name(?:$|)/gi, waifu);
 			return message.channel.send(replace);
 		} else if (tipe === 'wangi') {
 			const waifu = args[1];
 			if (!waifu) return message.channel.send('Please pass waifu name to be halucinated');
-			const wangiText = fs.readFileSync('./src/Text/wangi.txt', 'utf8');
+			const wangiText = fs.readFileSync('./src/assets/text/wangi.txt', 'utf8');
 			const replace = wangiText.replace(/(?:^|)name(?:$|)/gi, waifu);
 			return message.channel.send(replace);
 		} else if (tipe === 'ceplok') {
 			const waifu = args[1].toUpperCase();
 			if (!waifu) return message.channel.send('Please pass waifu name to be halucinated');
-			const ceplokText = fs.readFileSync('./src/Text/ceplok.txt', 'utf8');
+			const ceplokText = fs.readFileSync('./src/assets/text/ceplok.txt', 'utf8');
 			const replace = ceplokText.replace(/(?:^|)name(?:$|)/gi, waifu);
 			return message.channel.send(replace);
 		} else {

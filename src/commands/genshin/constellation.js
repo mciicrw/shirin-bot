@@ -17,14 +17,19 @@ module.exports = class Conste extends Command {
         });
     }
     async exec(message, args) {
-        if (args.length == 0) return message.reply('Please add character to check constellation')
-        .then(m => setTimeout(() => {m.delete()}, 3000));
+        if (args.length == 0) {
+            const charList = genshin.characters('names',{matchCategories: true});
+
+            const listEmbed = new botEmbed()
+                .setColor(message.guild.me.displayHexColor)
+                .genshinList(charList,'Character')
+
+            return message.reply({embeds: [listEmbed]})
+        }
 
         await message.channel.sendTyping();
         const charCons = genshin.constellations(args[0]);
-        const charDetails = genshin.characters(args[0]);
-
-        console.log(charDetails.element)
+        
         const consteEmbed = new botEmbed()
         .addGenshinDetails(args[0])
         .addField(`Constellation`,'\u200b')

@@ -8,15 +8,14 @@ module.exports = class SlashPing extends Interaction {
         });
     }
     async exec(interaction) {
-        const msg = interaction.reply('pinging')
+        const msg = await interaction.channel.sendTyping();
 
-        const latency = msg.createdTimestamp - interaction.createdTimestamp;
+        // const latency = msg.createdTimestamp - interaction.createdTimestamp;
 		const pingEmbed = new MessageEmbed()
 			.setColor(4568450)
 			.setTitle(':ping_pong: Pong!')
 			.addFields(
-				{ name: 'Heartbeat', value: `${Math.round(this.client.ws.ping)} ms` },
-				{ name: 'Roundtrip', value: `${latency} ms` }
+				{ name: 'Heartbeat', value: `${Math.round(this.client.ws.ping)} ms` }
 			);
 
         return interaction.editReply({ ephemeral: true, embeds: [pingEmbed]})

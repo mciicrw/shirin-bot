@@ -19,7 +19,7 @@ module.exports = class Ping extends Command {
 	}
 
 	async exec(message) {
-		// const msg = await message.channel.send('Pinging...');
+		const msg = await message.channel.send('Pinging...');
 
 		const latency = msg.createdTimestamp - message.createdTimestamp;
 		const pingEmbed = new Discord.MessageEmbed()

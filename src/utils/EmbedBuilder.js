@@ -50,6 +50,20 @@ module.exports = class botEmbed extends MessageEmbed {
         return this
     }
 
+    genshinList(listarr, type){
+        this.title = `${type}s List`
+        this.description = `Below are list of ${type.toLowerCase()}s that currently available`
+        this.fields = [
+            {
+                name: '\u200b',
+                value: `\`\`\`fix\n${listarr.join('\n')}\`\`\``,
+                inline: false
+            }
+        ]
+
+        return this
+    }
+
     splitFields(contentOrTitle, rawContent) {
 		if (typeof contentOrTitle === 'undefined') return this;
 
