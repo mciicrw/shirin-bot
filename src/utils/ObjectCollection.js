@@ -137,7 +137,11 @@ const arteDomain = [
     },
     {
         name: "Trounce Domain & World Boss",
-        list: ["Berseker", "Instructor", "The Exile", "Gladiator's Finale", "Wanderer's Troupe"]
+        list: ["Berserker", "Instructor", "The Exile", "Gladiator's Finale", "Wanderer's Troupe"]
+    },
+    {
+        name: "World Boss",
+        list: ["Prayers for Destiny", "Prayers for Illumination", "Prayers for Wisdom", "Prayers to Springtime"]
     }
 ]
 

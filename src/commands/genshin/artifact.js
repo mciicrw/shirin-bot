@@ -33,6 +33,19 @@ module.exports = class Arte extends Command {
 
         const arteSource = arteDomain.filter( domain => domain.list.find(arte => arte === arteDetails.name))
 
+        if(arteDetails.name.includes('prayers')) {
+            const arteEmbed = new botEmbed()
+            .setColor(message.guild.me.displayHexColor)
+            .setTitle(arteDetails.name)
+            .setThumbnail(arteDetails.images.circlet)
+            .setDescription(raritymoji[arteDetails.rarity[arteDetails.rarity.length - 1] - 1])
+            .addFields([
+                {name:"1 Set Effect", value: arteDetails['1pc'], inline:true},
+                {name:"Location", value: arteSource[0].name, inline:false}
+            ])
+        return message.reply({embeds:[arteEmbed]})
+        }
+
         const arteEmbed = new botEmbed()
             .setColor(message.guild.me.displayHexColor)
             .setTitle(arteDetails.name)
