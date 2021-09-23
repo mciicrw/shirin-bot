@@ -5,7 +5,11 @@ const emobjects = require('../assets/data/ObjectCollection');
 
 // module.exports =
 module.exports = class botEmbed extends MessageEmbed {
-    
+    /**
+     * Genshin character details embed
+     * @param {any} character character object
+     * @returns MessageEmbed
+     */
     addGenshinDetails(character) {
         const charDetails = genshin.character(character);
 
@@ -20,6 +24,11 @@ module.exports = class botEmbed extends MessageEmbed {
         return this
     }
 
+    /**
+     * Domain Rotation embed for genshin
+     * @param {number} dow date of week
+     * @returns MessageEmbed
+     */
     domainRotation(dow){
         this.color = '#FFAA00'
         if (dow === 0){
@@ -50,6 +59,12 @@ module.exports = class botEmbed extends MessageEmbed {
         return this
     }
 
+    /**
+     * List embed for genshin
+     * @param {array} listarr list array from genshin-db search result
+     * @param {string} type list type, can be weapon, character, or artifact
+     * @returns MessageEmbed
+     */
     genshinList(listarr, type){
         this.title = `${type}s List`
         this.description = `Below are list of ${type.toLowerCase()}s that currently available`
@@ -64,9 +79,45 @@ module.exports = class botEmbed extends MessageEmbed {
         return this
     }
 
-    async reactList(message) {
-       await message.react('⏪');
-       await message.react('⏩');
+    /**
+     * Embed builder for genshin weapon command
+     * @param {any} weapon weapon object from genshin-db
+     * @param {string} baseatk calculated weapon baseatk
+     * @param {string} sub calculated weapon substat
+     * @param {string} refine formatted refinement string
+     * @returns MessageEmbed
+     */
+    weaponEmbed(weapon, baseatk, sub, refine){
+        if (weapon.rarity <=2){
+            this.title = weapon.name;
+            this.description = [
+                weapon.description,
+                emobjects.raritymoji[weapon.rarity - 1]
+            ].join('\n');
+            this.fields = [
+                {name: "Weapon Type", value: weapon.weapontype, inline:true},
+                {name: "Ascension Material Type", value: weapon.weaponmaterialtype ? weapon.weaponmaterialtype : 'Unknown', inline:true},
+                {name: "Base ATK", value: weapon.baseatk.toString(), inline:true}
+            ];
+
+            return this
+        }
+
+        this.title = weapon.name;
+        this.description = [
+            weapon.description,
+            emobjects.raritymoji[weapon.rarity - 1]
+        ].join('\n');
+        this.fields = [
+            {name: "Weapon Type", value: weapon.weapontype, inline:true},
+            {name: "Ascension Material Type", value: weapon.weaponmaterialtype ? weapon.weaponmaterialtype : 'Unknown', inline:true},
+            {name: '\u200b', value: '\u200b', inline:false},
+            {name: "Base ATK", value: baseatk, inline:true},
+            {name: weapon.substat, value: sub, inline:true},
+            {name: weapon.effectname, value: refine, inline:false}
+        ];
+
+        return this
     }
 
     splitFields(contentOrTitle, rawContent) {
