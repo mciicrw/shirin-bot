@@ -1,6 +1,6 @@
 const genshin = require('genshin-db');
 const botEmbed = require('../../utils/EmbedBuilder');
-const { arteDomain, raritymoji } = require('../../utils/ObjectCollection');
+const { arteDomain, raritymoji } = require('../../assets/data/ObjectCollection');
 
 module.exports = class Arte extends Command {
     constructor() {
@@ -21,11 +21,14 @@ module.exports = class Arte extends Command {
         if (args.length == 0) {
             const arteListFarm = genshin.artifacts('4',{matchCategories: true});
             const arteListFod = genshin.artifacts('2',{matchCategories: true});
-            const arteList = arteListFarm.concat(arteListFod);
+            // const arteList = arteListFarm.concat(arteListFod);
+            const arteList = genshin.artifacts('names',{matchCategories: true})
 
             const listEmbed = new botEmbed()
                 .setColor(message.guild.me.displayHexColor)
                 .genshinList(arteList,'Artifact')
+                .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
+                .setTimestamp();
 
             return message.reply({embeds: [listEmbed]})
         }
@@ -45,6 +48,8 @@ module.exports = class Arte extends Command {
                 {name:"1 Set Effect", value: arteDetails['1pc'], inline:true},
                 {name:"Location", value: arteSource[0].name, inline:false}
             ])
+            .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
+            .setTimestamp();
             return message.reply({embeds:[arteEmbed]})
         }
 
@@ -59,6 +64,8 @@ module.exports = class Arte extends Command {
                 {name:"Location", value: arteSource[0].name, inline:false}
                 
             ])
+            .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
+            .setTimestamp();
         return message.reply({embeds:[arteEmbed]})
 
     }

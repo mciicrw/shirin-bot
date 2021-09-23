@@ -1,7 +1,7 @@
 const { MessageAttachment } = require('discord.js');
 const genshin = require('genshin-db');
 const botEmbed = require('../../utils/EmbedBuilder');
-const { rotationData } = require('../../utils/ObjectCollection');
+const { rotationData } = require('../../assets/data/ObjectCollection');
 
 module.exports = class domainRt extends Command {
     constructor() {

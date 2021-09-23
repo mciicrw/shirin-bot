@@ -8,5 +8,6 @@ module.exports = class Ready extends Event {
     async exec() {
         this.client.logger.log(`Connected into ${this.client.user.tag}`, { tag: 'Ready' });
         await this.client.loadInteractions();
+        this.client.user.setActivity('Traveler', { type: 'WATCHING'})
     }
 }

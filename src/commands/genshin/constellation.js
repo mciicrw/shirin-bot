@@ -23,6 +23,8 @@ module.exports = class Conste extends Command {
             const listEmbed = new botEmbed()
                 .setColor(message.guild.me.displayHexColor)
                 .genshinList(charList,'Character')
+                .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
+                .setTimestamp();
 
             return message.reply({embeds: [listEmbed]})
         }

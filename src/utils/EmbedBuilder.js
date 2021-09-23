@@ -1,6 +1,6 @@
 const { MessageEmbed, MessageAttachment } = require('discord.js');
 const genshin = require('genshin-db');
-const emobjects = require('./ObjectCollection');
+const emobjects = require('../assets/data/ObjectCollection');
 
 
 // module.exports =
@@ -64,6 +64,11 @@ module.exports = class botEmbed extends MessageEmbed {
         return this
     }
 
+    async reactList(message) {
+       await message.react('⏪');
+       await message.react('⏩');
+    }
+
     splitFields(contentOrTitle, rawContent) {
 		if (typeof contentOrTitle === 'undefined') return this;
 
@@ -103,4 +108,11 @@ module.exports = class botEmbed extends MessageEmbed {
 		}
 		return this;
 	}
+
+    shirinFooter(message){
+        this.footer = `Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true })
+        this.timestamp
+        
+        return this
+    }
 }
