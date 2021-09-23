@@ -75,7 +75,7 @@ module.exports = class CharBuild extends Command {
 
             if (weapon.rarity >= 3) {
                 sub = weapon.substat === "Elemental Mastery" ? 
-                    Math.trunc(stat90.specialized) : `${Math.floor(stat90.specialized * 1000) / 10}%`
+                    `${Math.trunc(stat90.specialized)}` : `${Math.floor(stat90.specialized * 1000) / 10}%`
                 refine = weapon.effect
                 for( let i = 0; i < weapon.effect.match(/{.}/g).length; i++) {
                     refine = refine.replace(`{${i}}`, `**${weapon.r5[i]}**`);
@@ -99,7 +99,7 @@ module.exports = class CharBuild extends Command {
         let sub = '';
         let refine = '';
         if (weapon.rarity >= 3) {
-            sub = weapon.substat === "Elemental Mastery" ? weapon.subvalue : `${weapon.subvalue}%`
+            sub = weapon.substat === "Elemental Mastery" ? `${weapon.subvalue}` : `${weapon.subvalue}%`
             refine = weapon.effect
             for( let i = 0; i < weapon.effect.match(/{.}/g).length; i++) {
                 refine = refine.replace(`{${i}}`, `**${weapon.r1[i]}**`);
