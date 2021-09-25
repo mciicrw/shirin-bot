@@ -7,7 +7,7 @@ module.exports = class domainRt extends Command {
     constructor() {
         super({
             name: "domainrt",
-            aliases: ["rotation","today"],
+            aliases: ["rotation","today", "daily"],
             description: "Today's domain rotation",
             usage: "cons <character name>",
             category: "Genshin",

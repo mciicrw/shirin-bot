@@ -5,6 +5,8 @@
 
 const raritymoji = ['⭐','⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐']
 
+const raritycode = ['1★', '2★', '3★', '4★', '4★'];
+
 const element = {
     "Cryo": {
         emoji: "<:Element_Cryo:888263635854569482>",
