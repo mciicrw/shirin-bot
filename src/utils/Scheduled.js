@@ -7,10 +7,11 @@ const botEmbed = require('./EmbedBuilder');
 module.exports = class Scheduled {
 
     dailyRotation(client){
-        cron.schedule('* 3 * * *', () => {
+        cron.schedule('0 3 * * *', () => {
             const logch = client.channels.cache.get(config.log)
             const today = new Date
             const attach = new discord.MessageAttachment(rotationData[today.getDay()].image)
+            const todaydow = today.getDay() >= 6 ? 0 : today.getDay() + 1
             const rotatEmbed = new botEmbed()
                 .domainRotation(today.getDay())
                 .setImage(`attachment://${rotationData[today.getDay()].imgname[0]}`)
