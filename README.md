@@ -21,3 +21,9 @@ This bot is using [Discord-Template-V13](https://github.com/gonzyui/Discord-Temp
 - done clone this repo and edit `.env` and `config.json` file
 - Do `npm i -D` for installing nodemon which listed as dev dependency
 - Run the bot using `npm run dev`
+
+## TODO
+- [ ] Migrate Moment.js to Luxon
+- [ ] Complete Build Command
+- [ ] Add day specific for domain rotation command
+- [ ] Embed pagination using button and/or dropdown (MenuSelect)

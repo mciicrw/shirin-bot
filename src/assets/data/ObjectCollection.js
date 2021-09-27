@@ -5,7 +5,7 @@
 
 const raritymoji = ['⭐','⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐']
 
-const raritycode = ['1★', '2★', '3★', '4★', '4★'];
+const raritycode = ['1★', '2★', '3★', '4★', '5★'];
 
 const element = {
     "Cryo": {
