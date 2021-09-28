@@ -40,15 +40,6 @@ const element = {
 
 const rotationData = [
     {
-        day: "Sunday",
-        image: "./src/assets/img/sunday.png",
-        mats: "Everything",
-        talent: "Every talent and ascension material opened today\nYou can farm any domain that you need",
-        imgtlt: "",
-        imgmats:"",
-        imgname: ["sunday.png","sunday-mats.png","sunday-talent.png"]
-    },
-    {
         day: "Monday",
         image: "./src/assets/img/monday.png",
         mats: "**Mondstadt**: Decarabian\n**Liyue**: Guyun\n**Inazuma**: Distant Sea",
@@ -101,6 +92,15 @@ const rotationData = [
         imgtlt: "",
         imgmats:"",
         imgname: ["wednesday.png","wednesday-mats.png","wednesday-talent.png"]
+    },
+    {
+        day: "Sunday",
+        image: "./src/assets/img/sunday.png",
+        mats: "Everything",
+        talent: "Every talent and ascension material opened today\nYou can farm any domain that you need",
+        imgtlt: "",
+        imgmats:"",
+        imgname: ["sunday.png","sunday-mats.png","sunday-talent.png"]
     }
 ]
 

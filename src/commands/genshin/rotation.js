@@ -2,6 +2,7 @@ const { MessageAttachment } = require('discord.js');
 const genshin = require('genshin-db');
 const botEmbed = require('../../utils/EmbedBuilder');
 const { rotationData } = require('../../assets/data/ObjectCollection');
+const { DateTime } = require('luxon');
 
 module.exports = class domainRt extends Command {
     constructor() {
@@ -19,11 +20,11 @@ module.exports = class domainRt extends Command {
     }
     
     async exec(message,args) {
-        const today = new Date
-        const attach = new MessageAttachment(rotationData[today.getDay()].image)
+        const today = DateTime.now().setZone('Asia/Jakarta').weekday - 1
+        const attach = new MessageAttachment(rotationData[today].image)
         const rotatEmbed = new botEmbed()
-        .domainRotation(today.getDay())
-        .setImage(`attachment://${rotationData[today.getDay()].imgname[0]}`)
+        .domainRotation(today)
+        .setImage(`attachment://${rotationData[today].imgname[0]}`)
         message.reply({embeds: [rotatEmbed],files: [attach]});
     }
 }

@@ -109,7 +109,12 @@ module.exports = class CharBuild extends Command {
         const wpEmbed = new botEmbed()
             .setThumbnail(weapon.images.icon)
             .setColor(message.guild.me.displayHexColor)
-            .weaponEmbed(weapon,baseatk,sub,refine)
+            .weaponEmbed({
+                weapon: weapon,
+                baseatk: baseatk,
+                sub: sub,
+                refine: refine
+            })
             .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
 	        .setTimestamp();
 
