@@ -87,7 +87,7 @@ module.exports = class botEmbed extends MessageEmbed {
      * @param {string} refine formatted refinement string
      * @returns MessageEmbed
      */
-    weaponEmbed({weapon, baseatk, sub, refine}){
+    weaponEmbed(weapon, baseatk, sub, refine){
         if (weapon.rarity <=2){
             this.title = weapon.name;
             this.description = [
