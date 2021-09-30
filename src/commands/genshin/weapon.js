@@ -19,48 +19,16 @@ module.exports = class CharBuild extends Command {
     }
 
     async exec(message,args) {
-        const prf = process.env.DEPLOY === "DEV" ? config.devPrefix : config.prefix;
+        // const prf = process.env.DEPLOY === "DEV" ? config.devPrefix : config.prefix;
         const name = args.join(' ')
         if (!name || name.length == 0) {
-            const helperEmbed = new botEmbed()
-                .setTitle('Weapon Command')
-                .setDescription([
-                    "It seems you don't input any argument here",
-                    "Here i display how to use this command",
-                    "I don't use embed pagination because don't know how"
-                ].join('\n'))
-                .setColor(message.guild.me.displayHexColor)
-                .addFields([
-                    {
-                        name: "Weapon Listing by rarity or single alphabet character",
-                        value: `\`\`\`ml\n${prf}weapon <1>\n\`\`\``
-                    },
-                    {
-                        name: "Weapon Description",
-                        value: `\`\`\`ml\n${prf}weapon <name>\n\`\`\``
-                    },
-                    {
-                        name: "Weapon Description, but max status",
-                        value: `\`\`\`ml\n${prf}weapon <name> -m\n\`\`\``
-                    }
-                ])
-                .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
-                .setTimestamp();
-
-                return message.reply({embeds: [helperEmbed]})
-        }
-        if (name.length == 1) { 
-            const weapon = genshin.weapons(name,{matchCategories:true});
-            if (!weapon ) return message.reply(`Invalid weapon rarity!`);
-
-            console.log(weapon)
-            const listEmbed = new botEmbed()
-                .setColor(message.guild.me.displayHexColor)
-                .genshinList( weapon, 'Weapon')
-                .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
-	            .setTimestamp();
-
-            return message.reply({embeds: [listEmbed]});
+           const weaponList = genshin.weapons('names', {matchCategories:true})
+           const listChunked = [];
+           for(let i = 0; i < weaponList.length; i += 12){
+               const chunk = weaponList.slice(i, i + 12);
+               listChunked.push(chunk)
+           }
+           return this.client.gutils.sendListEmbed(message,listChunked,'Weapon');
         }
 
         if (name.endsWith(' -m')) {

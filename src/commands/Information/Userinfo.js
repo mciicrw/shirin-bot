@@ -1,7 +1,5 @@
-
 const { MessageEmbed } = require('discord.js');
-const moment = require('moment');
-const { prefix } = require('../../../config.json');
+const { DateTime } = require('luxon');
 
 const flags = {
 	DISCORD_EMPLOYEE: 'Discord Employee',
@@ -51,13 +49,13 @@ module.exports = class UserInfo extends Command {
 				`**~❯ ID:** ${member.id}`,
 				`**~❯ Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
 				`**~❯ Avatar:** [Link to avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
-				`**~❯ Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} (${moment(member.user.createdTimestamp).fromNow()})`,
+				`**~❯ Time Created:** ${DateTime.fromMillis(member.user.createdTimestamp).toFormat('t')} ${DateTime.fromMillis(member.user.createdTimestamp).toFormat('DDD')} ${DateTime.fromMillis(member.user.createdTimestamp).toRelative()})`,
 				'\u200b'
 			].join('\n'))
 			.addField(':mag_right: | Member', [
 				`**~❯ Server Nickname:** ${member.displayName}`,
 				`**~❯ Highest Role:** ${member.roles.highest.id === message.guild.id ? 'none' : member.roles.highest.name}`,
-				`**~❯ Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
+				`**~❯ Join Date:** ${DateTime.fromMillis(member.joinedTimestamp).toFormat('DDD tt')}`,
 				`**~❯ Roles [${roles.length}]:** ${roles.length < 5 ? roles.join(', ') : roles.length > 5 ? this.client.utils.trimArray(roles).join('\n') : 'None'}`,
 				'\u200b'
 			].join('\n'))

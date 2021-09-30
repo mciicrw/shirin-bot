@@ -19,18 +19,14 @@ module.exports = class Arte extends Command {
 
     async exec(message, args){
         if (args.length == 0) {
-            const arteListFarm = genshin.artifacts('4',{matchCategories: true});
-            const arteListFod = genshin.artifacts('2',{matchCategories: true});
-            // const arteList = arteListFarm.concat(arteListFod);
             const arteList = genshin.artifacts('names',{matchCategories: true})
-
-            const listEmbed = new botEmbed()
-                .setColor(message.guild.me.displayHexColor)
-                .genshinList(arteList,'Artifact')
-                .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
-                .setTimestamp();
-
-            return message.reply({embeds: [listEmbed]})
+            const listChunked = [];
+            for(let i = 0; i < arteList.length; i += 12){
+                const chunk = arteList.slice(i,i+12);
+                listChunked.push(chunk)
+            }
+            // return console.log(listChunked)
+            return this.client.gutils.sendListEmbed(message,listChunked,'Artifact');
         }
 
         const arteDetails = genshin.artifacts(args.join(' '), {matchAliases:true, matchCategories:true});

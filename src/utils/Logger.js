@@ -1,4 +1,4 @@
-const moment = require('moment');
+const {DateTime} = require('luxon');
 const chalk = require('chalk');
 const util = require('util');
 
@@ -16,7 +16,7 @@ module.exports = class Logger {
     }
 
     static write(content, { color = 'grey', tag = 'Log', error = false } = {}) {
-        const timestamp = chalk.cyan(`[${moment().format('DD-MM-YYYY kk:mm:ss')}]:`);
+        const timestamp = chalk.cyan(`[${DateTime.now().toFormat('dd-MM-yyyy HH:mm:ss')}]:`);
         const levelTag = chalk.bold(`[${tag}]`);
         const text = chalk[color](this.clean(content));
         const stream = error ? process.stderr : process.stdout;

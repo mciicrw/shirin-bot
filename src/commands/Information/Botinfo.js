@@ -1,10 +1,8 @@
-
+const { DateTime } = require('luxon');
 const { MessageEmbed, version: djsversion } = require('discord.js');
 const { version } = require('../../../package.json');
-const { utc } = require('moment');
 const os = require('os');
 const ms = require('ms');
-const { prefix } = require('../../../config.json');
 
 module.exports = class BotInfo extends Command {
 
@@ -23,6 +21,7 @@ module.exports = class BotInfo extends Command {
 	}
 
 	exec(message) {
+		console.log()
 		const core = os.cpus()[0];
 		const botEmbed = new MessageEmbed()
 			.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true }))
@@ -34,7 +33,7 @@ module.exports = class BotInfo extends Command {
 				`**~❯ Servers:** ${this.client.guilds.cache.size.toLocaleString()}`,
 				`**~❯ User:** ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
 				`**~❯ Channel:** ${this.client.channels.cache.size.toLocaleString()}`,
-				`**~❯ Creation Date:** ${utc(this.client.user.createdTimestamp).format('Do MMMM YYYY HH:mm:ss')}`,
+				`**~❯ Creation Date:** ${DateTime.fromMillis(this.client.user.createdTimestamp).toUTC().toFormat('d MMMM yyyy HH:mm:ss')}`,
 				`**~❯ Node.js Version:** ${process.version}`,
 				`**~❯ Bot Version:** v${version}`,
 				`**~❯ Discord.js Version:** ${djsversion}`,

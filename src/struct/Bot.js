@@ -4,6 +4,7 @@ const { sync } = require('glob');
 const config = require('../../config.json');
 const Util = require('../utils/Utility');
 const Scheduled = require('../utils/Scheduled');
+const GenshinUtils = require('../utils/GenshinUtils');
 
 require('./Interaction');
 require('./Command');
@@ -27,6 +28,7 @@ module.exports = class Bot extends Client {
         this.interactions = new Collection();
         this.utils = new Util(this);
         this.schedule = new Scheduled(this);
+        this.gutils = new GenshinUtils(this);
     }
 
     // Load slash commands

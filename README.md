@@ -23,7 +23,8 @@ This bot is using [Discord-Template-V13](https://github.com/gonzyui/Discord-Temp
 - Run the bot using `npm run dev`
 
 ## TODO
-- [ ] Migrate Moment.js to Luxon
+- [x] Migrate Moment.js to Luxon
 - [ ] Complete Build Command
+- [ ] Add community recommended build
 - [ ] Add day specific for domain rotation command
-- [ ] Embed pagination using button and/or dropdown (MenuSelect)
+- [x] Embed pagination using button and/or dropdown (MenuSelect)

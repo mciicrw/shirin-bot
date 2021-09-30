@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 const { MessageEmbed } = require('discord.js');
-const moment = require('moment');
-const { prefix } = require('../../../config.json');
+const {DateTime} = require('luxon');
 
 const filterLevels = {
 	DISABLED: 'Off',
@@ -66,7 +65,7 @@ module.exports = class ServerInfo extends Command {
 				`**~❯ Owner:** ${owner.user.tag}`,
 				`**~❯ Boost Tier:** ${message.guild.premiumTier === 'NONE' ? 'None' : `Tier ${message.guild.premiumTier}`}`,
 				`**~❯ Explicit Filter:** ${filterLevels[message.guild.explicitContentFilter]}`,
-				`**~❯ Time Created:** ${moment(message.guild.createdTimestamp).format('LT')} ${moment(message.guild.createdTimestamp).format('LL')} ${moment(message.guild.createdTimestamp).fromNow()}`,
+				`**~❯ Time Created:** ${DateTime.fromMillis(message.guild.createdTimestamp).toFormat('t')} ${DateTime.fromMillis(message.guild.createdTimestamp).toFormat('DDD')} ${DateTime.fromMillis(message.guild.createdTimestamp).toRelative()}`,
 				'\u200b'
 			].join('\n'))
 			.addField(':chart_with_upwards_trend: | Statistics', [
