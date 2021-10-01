@@ -31,7 +31,7 @@ module.exports = class botEmbed extends MessageEmbed {
      */
     domainRotation(dow){
         this.color = '#FFAA00'
-        if (dow === 0){
+        if (dow === 6){
             // const attachment = new MessageAttachment('../../img/sunday.png','img.png');
             this.title = "Today's Rotation | Sunday"
             this.fields =[

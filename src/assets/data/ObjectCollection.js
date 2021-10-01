@@ -41,7 +41,7 @@ const element = {
 const rotationData = [
     {
         day: "Monday",
-        image: "./src/assets/img/monday.png",
+        image: "https://raw.githubusercontent.com/mciicrw/img-resources/main/paimin/rotation/monday.png",
         mats: "**Mondstadt**: Decarabian\n**Liyue**: Guyun\n**Inazuma**: Distant Sea",
         talent: "**Mondstadt**: Freedom\n**Liyue**: Prosperity\n**Inazuma**: Transience",
         imgtlt: "",
@@ -50,7 +50,7 @@ const rotationData = [
     },
     {
         day: "Tuesday",
-        image: "./src/assets/img/tuesday.png",
+        image: "https://raw.githubusercontent.com/mciicrw/img-resources/main/paimin/rotation/tuesday.png",
         mats: "**Mondstadt**: Boreal\n**Liyue**: Elixir\n**Inazuma**: Narukami",
         talent: "**Mondstadt**: Resistance\n**Liyue**: Diligence\n**Inazuma**: Elegance",
         imgtlt: "",
@@ -59,7 +59,7 @@ const rotationData = [
     },
     {
         day: "Wednesday",
-        image: "./src/assets/img/wednesday.png",
+        image: "https://raw.githubusercontent.com/mciicrw/img-resources/main/paimin/rotation/wednesday.png",
         mats: "**Mondstadt**: Dandelion\n**Liyue**: Aerosiderite\n**Inazuma**: Mask",
         talent: "**Mondstadt**: Ballad\n**Liyue**: Gold\n**Inazuma**: Light",
         imgtlt: "",
@@ -68,7 +68,7 @@ const rotationData = [
     },
     {
         day: "Thursday",
-        image: "./src/assets/img/monday.png",
+        image: "https://raw.githubusercontent.com/mciicrw/img-resources/main/paimin/rotation/monday.png",
         mats: "**Mondstadt**: Decarabian\n**Liyue**: Guyun\n**Inazuma**: Distant Sea",
         talent: "**Mondstadt**: Freedom\n**Liyue**: Prosperity\n**Inazuma**: Transience",
         imgtlt: "",
@@ -77,7 +77,7 @@ const rotationData = [
     },
     {
         day: "Friday",
-        image: "./src/assets/img/tuesday.png",
+        image: "https://raw.githubusercontent.com/mciicrw/img-resources/main/paimin/rotation/tuesday.png",
         mats: "**Mondstadt**: Boreal\n**Liyue**: Elixir\n**Inazuma**: Narukami",
         talent: "**Mondstadt**: Resistance\n**Liyue**: Diligence\n**Inazuma**: Elegance",
         imgtlt: "",
@@ -86,7 +86,7 @@ const rotationData = [
     },
     {
         day: "Saturday",
-        image: "./src/assets/img/wednesday.png",
+        image: "https://raw.githubusercontent.com/mciicrw/img-resources/main/paimin/rotation/wednesday.png",
         mats: "**Mondstadt**: Dandelion\n**Liyue**: Aerosiderite\n**Inazuma**: Mask",
         talent: "**Mondstadt**: Ballad\n**Liyue**: Gold\n**Inazuma**: Light",
         imgtlt: "",
@@ -95,7 +95,7 @@ const rotationData = [
     },
     {
         day: "Sunday",
-        image: "./src/assets/img/sunday.png",
+        image: "https://raw.githubusercontent.com/mciicrw/img-resources/main/paimin/rotation/sunday.png",
         mats: "Everything",
         talent: "Every talent and ascension material opened today\nYou can farm any domain that you need",
         imgtlt: "",

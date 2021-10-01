@@ -84,7 +84,7 @@ module.exports = class GenshinUtils {
                     components: [
                         new MessageActionRow().addComponents(
                             new MessageButton({
-                                customId: 'farmable-stop',
+                                customId: 'list-stop',
                                 label: `type command again to refresh`,
                                 style: 'SECONDARY',
                                 disabled: true,
