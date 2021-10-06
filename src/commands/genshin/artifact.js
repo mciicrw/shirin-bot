@@ -25,7 +25,6 @@ module.exports = class Arte extends Command {
                 const chunk = arteList.slice(i,i+12);
                 listChunked.push(chunk)
             }
-            // return console.log(listChunked)
             return this.client.gutils.sendListEmbed(message,listChunked,'Artifact');
         }
 

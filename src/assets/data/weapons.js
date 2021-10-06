@@ -111,7 +111,7 @@ const weapons = {
         name: "Recurve Bow",
         rarity: 3
       },
-      "sharpshooter's_oath": {
+      "sharpshooters_oath": {
         name: "Sharpshooter's Oath",
         rarity: 3
       },
@@ -195,7 +195,7 @@ const weapons = {
         name: "Dodoco Tales",
         rarity: 4
       },
-      "dragon's_bane": {
+      "dragons_bane": {
         name: "Dragon's Bane",
         rarity: 4
       },

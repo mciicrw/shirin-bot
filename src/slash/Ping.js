@@ -18,6 +18,6 @@ module.exports = class SlashPing extends Interaction {
 				{ name: 'Heartbeat', value: `${Math.round(this.client.ws.ping)} ms` }
 			);
 
-        return interaction.editReply({ ephemeral: true, embeds: [pingEmbed]})
+        return interaction.reply({ ephemeral: true, embeds: [pingEmbed]})
     }
 }
