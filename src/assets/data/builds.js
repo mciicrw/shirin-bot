@@ -1,4 +1,5 @@
 // regex-> refine: \[\n *1\n *\],
+/* eslint-disable indent */
 const builds = {
   sucrose: {
     roles: {
@@ -3742,4 +3743,4 @@ const builds = {
 };
 
 
-module.exports= {builds};
+module.exports = {builds};
