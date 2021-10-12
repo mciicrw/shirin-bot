@@ -228,17 +228,25 @@ module.exports = class GenshinUtils {
 	 * genshin character details main function
 	 * @param {Message} message discordjs message event
 	 * @param {string} charname genshin character name
+	 * @param {string} element string element type
 	 * @returns Message
 	 */
-	async getCharDetails(message, charname) {
+	async getCharDetails(message, charname, element) {
 		let counter = 0;
 		let selValue = 0;
-		const charvar = charname === 'traveler' ? 'aether' : charname;
+		const charvar = charname === 'traveler' || charname === 'sora' ? 'aether' :
+			charname === 'hotaru' ? 'lumine' : charname;
+		const charother = charname === 'aether' || charname === 'lumine' ? 'traveler' : charname;
+		if (charother === 'traveler' && !element) return message.reply('Please specify traveler\'s element!');
 		const detailsArr = ['bio', 'ascend', 'constellation', 'talent'];
 		const character = genshin.characters(charvar, {matchAliases:true});
 		if(!character || Array.isArray(character)) return message.reply('Sorry I cannot find character data that you\'re looking for');
-		const conste = genshin.constellations(charvar, {matchAliases:true});
-		const talent = genshin.talents(charvar, {matchAliases:true});
+		const conste = charother === 'traveler' ?
+			genshin.constellations(charother + ' ' + element, {matchAliases:true}) :
+			genshin.constellations(charother);
+		const talent = charother === 'traveler' ?
+			genshin.talents(charother + ' ' + element, {matchAliases:true}) :
+			genshin.talents(charother);
 		const talentarr = this.getCharTalent(talent);
 		const charaEmbed = new botEmbed()
 			.charDetails(character);
@@ -417,7 +425,7 @@ module.exports = class GenshinUtils {
 			const choosetalent = sevenTalent.filter(tType => tType.charlist.find(char => char === talent.name));
 			return this.pussshh(talent, charentriesslice, choosetalent[0].type);
 		}
-		if(charentriesslice.length == 6) {
+		if(charentriesslice.length <= 6) {
 			return this.pussshh(talent, charentriesslice, 'normal');
 		}
 		return undefined;

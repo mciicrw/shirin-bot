@@ -14,7 +14,7 @@ module.exports = class botEmbed extends MessageEmbed {
 		const charDetails = character; // genshin.character(character);
 
 		this.color = !emobjects.element[charDetails.element] ? '#e9d6aa' : emobjects.element[charDetails.element].color;
-		this.title = charDetails.name + ' | ' + charDetails.title;
+		this.title = charDetails.title === '' ? `${charDetails.name} | Traveler` : `${charDetails.name} | ${charDetails.title}`;
 		this.url = charDetails.url.fandom;
 		this.thumbnail = {url: charDetails.images.icon};
 		if(emobjects.element[charDetails.element]) {
@@ -172,8 +172,8 @@ module.exports = class botEmbed extends MessageEmbed {
 				value: [
 					`**Gender:** ${character.gender}`,
 					`**Weapon:** ${character.weapontype}`,
-					`**Birthday:** ${character.birthday}`,
-					`**Region:** ${character.region}/${character.affiliation}`,
+					`**Birthday:** ${character.birthday || 'Player\'s birthday'}`,
+					`**Region:** ${character.region || 'None'} / ${character.affiliation || 'None'}`,
 					`**Constellation:** ${character.constellation}`
 				].join('\n'),
 				inline: false
