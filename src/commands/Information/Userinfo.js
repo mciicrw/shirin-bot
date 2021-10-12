@@ -22,16 +22,16 @@ module.exports = class UserInfo extends Command {
 
 	constructor() {
 		super({
-            name: "userinfo",
-            aliases: ["user","profile"],
-            description: "Check your own discord profile",
-            usage: "",
-            category: "Information",
-            ownerOnly: false,
-            cooldown: 3000,
-            memberPerms: [],
-            clientPerms: [],
-        });
+			name: "userinfo",
+			aliases: ["user", "profile"],
+			description: "Check your own discord profile",
+			usage: "",
+			category: "Information",
+			ownerOnly: false,
+			cooldown: 3000,
+			memberPerms: [],
+			clientPerms: [],
+		});
 	}
 
 	async exec(message, [target]) {

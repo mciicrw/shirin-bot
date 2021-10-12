@@ -147,5 +147,16 @@ const arteDomain = [
 	}
 ];
 
+const sevenTalent = [
+	{
+		type: 'active',
+		charlist: ['Mona', 'Kamisato Ayaka']
+	},
+	{
+		type: 'passive',
+		charlist: ['Sangonomiya Kokomi']
+	},
+];
 
-module.exports = { raritymoji, element, rotationData, arteDomain };
+
+module.exports = { raritymoji, element, rotationData, arteDomain, sevenTalent };

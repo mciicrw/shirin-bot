@@ -13,12 +13,18 @@ module.exports = class botEmbed extends MessageEmbed {
 	addGenshinHeader(character) {
 		const charDetails = character; // genshin.character(character);
 
-		this.color = emobjects.element[charDetails.element].color;
+		this.color = !emobjects.element[charDetails.element] ? '#e9d6aa' : emobjects.element[charDetails.element].color;
 		this.title = charDetails.name + ' | ' + charDetails.title;
 		this.url = charDetails.url.fandom;
 		this.thumbnail = {url: charDetails.images.icon};
+		if(emobjects.element[charDetails.element]) {
+			this.description = [
+				`${emobjects.element[charDetails.element].emoji} | ${emobjects.raritymoji[charDetails.rarity - 1]}`,
+				charDetails.description
+			].join('\n');
+		}
 		this.description = [
-			`${emobjects.element[charDetails.element].emoji} | ${emobjects.raritymoji[charDetails.rarity - 1]}`,
+			emobjects.raritymoji[charDetails.rarity - 1],
 			charDetails.description
 		].join('\n');
 
@@ -121,7 +127,13 @@ module.exports = class botEmbed extends MessageEmbed {
 		return this;
 	}
 
-	charConste(conste, character) {
+	/**
+	 * Character constellation embed builder
+	 * @param {any} character character data collected from genshin-db
+	 * @param {array} conste consteallaction array collected from genshin-db
+	 * @returns MessageEmbed
+	 */
+	charConste(character, conste) {
 		this.addGenshinHeader(character);
 		for(let c = 0; c < 6; c++) {
 			const cons = `c${c + 1}`;
@@ -130,44 +142,72 @@ module.exports = class botEmbed extends MessageEmbed {
 		return this;
 	}
 
+	/**
+	 * Character ascension embed builder
+	 * @param {any} character character data collected from genshin-db
+	 * @returns MessageEmbed
+	 */
 	charAscend(character) {
 		this.addGenshinHeader(character);
 		const ascendEntries = Object.entries(character.costs);
 		ascendEntries.forEach((ascend, aIndex) => {
-			const ascendCostStr = ascend.map(entries => {
-				return `${entries.name}: ${entries.count}`;
+			const ascendCostStr = ascend[1].map(entries => {
+				return `**${entries.name}:** ${entries.count}`;
 			}).join('\n');
-			this.addField(`Ascend ${aIndex + 1}`, ascendCostStr, false);
+			this.addField(`Ascend ${aIndex + 1}`, ascendCostStr, true);
 		});
 		return this;
 	}
 
+	/**
+	 * Character details embed builder
+	 * @param {any}} character character data collected from genshin0db
+	 * @returns MessageEmbed
+	 */
 	charDetails(character) {
 		this.addGenshinHeader(character);
 		this.fields = [
 			{
 				name: 'Details',
 				value: [
-					`Gender: ${character.gender}`,
-					`Weapon: ${character.weapontype}`,
-					`Birthday: ${character.birthday}`,
-					`Region: ${character.region}/${character.affiliation}`,
-					`Constellation: ${character.constellation}`
+					`**Gender:** ${character.gender}`,
+					`**Weapon:** ${character.weapontype}`,
+					`**Birthday:** ${character.birthday}`,
+					`**Region:** ${character.region}/${character.affiliation}`,
+					`**Constellation:** ${character.constellation}`
 				].join('\n'),
 				inline: false
 			},
 			{
 				name: 'VA',
 				value: [
-					`English: ${character.cv.english}`,
-					`Chinese: ${character.cv.chinese}`,
-					`Japanese: ${character.cv.japanese}`,
-					`Korean: ${character.cv.korean}`
+					`**English:** ${character.cv.english}`,
+					`**Chinese:** ${character.cv.chinese}`,
+					`**Japanese:** ${character.cv.japanese}`,
+					`**Korean:** ${character.cv.korean}`
 				].join('\n'),
 				inline: false
 			}
 		];
 		this.image = {url: character.images.cover1};
+		if(character.name === 'Lumine' || character.name === 'Aether') this.image = {url:character.images.portrait};
+		return this;
+	}
+
+	charTalent(character, talent) {
+		const type = talent.type.slice(0, -1);
+		this.addGenshinHeader(character);
+		if(type === 'combat' || type === 'combats') {
+			this.fields = [
+				{name: talent.name, value: talent.info, inline: false},
+				{name: 'Attributes', value: talent.attributes.join('\n'), inline:false}
+			];
+		}
+		if(type === 'passive') {
+			this.fields = [
+				{name: talent.name, value: talent.effect, inline: false}
+			];
+		}
 		return this;
 	}
 

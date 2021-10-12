@@ -19,7 +19,7 @@ module.exports = class domainRt extends Command {
 	}
 
 	async exec(message, args) {
-
+		let uhh = 0;
 		const today = DateTime.now().setZone('Asia/Jakarta').weekday - 1;
 		const rotatEmbed = new botEmbed()
 			.domainRotation(today)
@@ -49,10 +49,10 @@ module.exports = class domainRt extends Command {
 
 		collector?.on('collect', async inter => {
 			if(inter.customId === 'rotationSelect') {
-				const dow = Number(inter.values[0].at(-1));
+				uhh = Number(inter.values[0].at(-1));
 				const rotatEmbed = new botEmbed()
-					.domainRotation(dow)
-					.setImage(rotationData[dow].image);
+					.domainRotation(uhh)
+					.setImage(rotationData[uhh].image);
 				const row = new MessageActionRow().addComponents(
 					new MessageSelectMenu({
 						customId: 'rotationSelect',
@@ -65,8 +65,11 @@ module.exports = class domainRt extends Command {
 		});
 
 		collector?.on('end', async inter => {
+			const rotatEmbed = new botEmbed()
+				.domainRotation(uhh)
+				.setImage(rotationData[uhh].image);
 			msg.edit({
-				content:'test',
+				embeds: [rotatEmbed],
 				components: [
 					new MessageActionRow().addComponents(
 						new MessageSelectMenu({

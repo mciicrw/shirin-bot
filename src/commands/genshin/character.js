@@ -33,7 +33,7 @@ module.exports = class GenshinChar extends Command {
 		// const charEmbed = new botEmbed()
 		// 	.charDetails(character);
 		// return message.reply({embeds:[charEmbed]});
-		return this.client.gutils.getCharDetails(message, args[0]);
+		return this.client.gutils.getCharDetails(message, args[0].toLowerCase());
 	}
 
 };
