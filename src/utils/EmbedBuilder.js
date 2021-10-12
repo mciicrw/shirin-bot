@@ -198,9 +198,13 @@ module.exports = class botEmbed extends MessageEmbed {
 		const type = talent.type.slice(0, -1);
 		this.addGenshinHeader(character);
 		if(type === 'combat' || type === 'combats') {
+			const attrb = talent.attributes.map(el => {
+				const splitd = el.split('|');
+				return `**${splitd[0]}**: ${splitd[1]}`;
+			})
 			this.fields = [
 				{name: talent.name, value: talent.info, inline: false},
-				{name: 'Attributes', value: talent.attributes.join('\n'), inline:false}
+				{name: 'Attributes', value: attrb.join('\n'), inline:false}
 			];
 		}
 		if(type === 'passive') {
