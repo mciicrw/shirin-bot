@@ -1,7 +1,7 @@
 const genshin = require('genshin-db');
 const botEmbed = require('../../utils/EmbedBuilder');
 // const config = require('../../../config.json');
-const { raritymoji } = require('../../assets/data/ObjectCollection');
+// const { raritymoji } = require('../../assets/data/ObjectCollection');
 
 module.exports = class CharBuild extends Command {
 	constructor() {

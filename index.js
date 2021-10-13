@@ -8,4 +8,4 @@ const client = new Bot();
 const token = process.env.DEPLOY === 'DEV' ? process.env.DEV_TOKEN : process.env.PROD_TOKEN;
 
 // And start the bot
-client.start(token);
+(async () => await client.start(token))();

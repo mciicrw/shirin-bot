@@ -40,8 +40,13 @@ module.exports = class GenshinUtils {
 
 			const row = new MessageActionRow().addComponents([bPrev, bNext]);
 
-			const repl = await message.reply({embeds: [listEmbed], components: [row]});
-
+			const idk = message.author;
+			let repl;
+			if(idk) repl = await message.reply({embeds: [listEmbed], components: [row]});
+			if(!idk) {
+				await message.reply({embeds: [listEmbed], components: [row]});
+				repl = await message.fetchReply();
+			}
 			const collector = repl.createMessageComponentCollector({
 				componentType: 'BUTTON',
 				time: 5 * 60 * 1000
