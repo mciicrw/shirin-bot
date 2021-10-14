@@ -1,6 +1,7 @@
 {
   "prefix": ";",
   "devPrefix": ".",
+  "chunksize": 12,
   "devGuild": "301932113605689355",
   "owners": [
     "301931016422162445"

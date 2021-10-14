@@ -17,7 +17,7 @@ module.exports = class GenshinUtils {
      */
 	async sendListEmbed(message, list, type) {
 		let listIndex = 0;
-		const example = type === 'Character' ? 'build' : type.toLowerCase;
+		const example = type === 'Character' ? 'build' : type.toLowerCase();
 		if(list.length > 1) {
 			const listEmbed = new botEmbed()
 				.setColor(message.guild.me.displayHexColor)
@@ -483,6 +483,7 @@ module.exports = class GenshinUtils {
 							if(outtype === 'F1P') storage = Math.floor(gettalentparam * 1000) / 10 + '%';
 							if(outtype === 'F2P') storage = Math.floor(gettalentparam * 10000) / 100 + '%';
 							if(outtype === 'F1') storage = `${Math.floor(gettalentparam)}`;
+							if(outtype === 'F2') storage = `${gettalentparam}`;
 							if(outtype === 'P') storage = Math.floor(gettalentparam * 100) + '%';
 							if(outtype === 'I') storage = `${Math.floor(gettalentparam)}`;
 							paramstr = paramstr.replace(el, storage);

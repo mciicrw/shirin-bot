@@ -201,7 +201,7 @@ module.exports = class botEmbed extends MessageEmbed {
 			const attrb = talent.attributes.map(el => {
 				const splitd = el.split('|');
 				return `**${splitd[0]}**: ${splitd[1]}`;
-			})
+			});
 			this.fields = [
 				{name: talent.name, value: talent.info, inline: false},
 				{name: 'Attributes', value: attrb.join('\n'), inline:false}
@@ -257,8 +257,9 @@ module.exports = class botEmbed extends MessageEmbed {
 	}
 
 	shirinFooter(message) {
-		this.footer = `Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true });
-		this.timestamp;
+		this.footer = message.author ?
+			{text: `Requested by ${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true })} : {text: `Requested by ${message.user.username}`, iconURL: message.user.displayAvatarURL({ dynamic: true })};
+		this.setTimestamp();
 
 		return this;
 	}
