@@ -107,8 +107,7 @@ module.exports = class GenshinUtils {
      */
 	async buildEmbed(message, character, data) {
 		let index = 0;
-		const buildEmbed = this.getBuildData(character, data[index]);
-		buildEmbed.shirinFooter(message);
+		const buildEmbed = this.getBuildData(message, character, data[index]);
 		if(data.length == 1) return message.reply({embeds:[buildEmbed]});
 
 		const buttons = data.map((builds, dindex) => {
@@ -135,7 +134,7 @@ module.exports = class GenshinUtils {
 		collector?.on('collect', async inter => {
 			if(inter.customId.startsWith('characterbuild-')) {
 				index = Number(inter.customId.substring('characterbuild-'.length));
-				const buildEmbed = this.getBuildData(character, data[index]);
+				const buildEmbed = this.getBuildData(message, character, data[index]);
 				buttons.forEach((button, dindex) => {
 					button.disabled = dindex === index;
 				});
@@ -149,8 +148,7 @@ module.exports = class GenshinUtils {
 
 		// eslint-disable-next-line no-unused-vars
 		collector?.on('end', async inter => {
-			const buildEmbed = this.getBuildData(character, data[index]);
-			buildEmbed.shirinFooter(message);
+			const buildEmbed = this.getBuildData(message, character, data[index]);
 			msg.edit({
 				embeds: [buildEmbed],
 				components: [
@@ -173,7 +171,7 @@ module.exports = class GenshinUtils {
 	 * @param {any} displayData selected build data
 	 * @returns MessageEmbed
 	 */
-	getBuildData(character, displayData) {
+	getBuildData(message, character, displayData) {
 		const name = displayData[0];
 		const build = displayData[1];
 		const weapon = build.weapons.map((weapon, dindex) => {
@@ -215,7 +213,8 @@ module.exports = class GenshinUtils {
 				{name: 'Sub Stats', value: arteSub, inline:true},
 				{name: 'Weapon', value: weapon, inline: true},
 				{name: 'Talent Priority', value: talent, inline: true},
-			]);
+			])
+			.shirinFooter(message);
 
 
 		if(build.tip) buildEmbed.addField('Ability Tips', build.tip, false);
