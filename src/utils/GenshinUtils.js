@@ -40,13 +40,7 @@ module.exports = class GenshinUtils {
 
 			const row = new MessageActionRow().addComponents([bPrev, bNext]);
 
-			const idk = message.author;
-			let repl;
-			if(idk) repl = await message.reply({embeds: [listEmbed], components: [row]});
-			if(!idk) {
-				await message.reply({embeds: [listEmbed], components: [row]});
-				repl = await message.fetchReply();
-			}
+			const repl = await this.isInteraction(message, [listEmbed], [row]);
 			const collector = repl.createMessageComponentCollector({
 				componentType: 'BUTTON',
 				time: 5 * 60 * 1000
@@ -114,8 +108,7 @@ module.exports = class GenshinUtils {
 	async buildEmbed(message, character, data) {
 		let index = 0;
 		const buildEmbed = this.getBuildData(character, data[index]);
-		buildEmbed.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
+		buildEmbed.shirinFooter(message);
 		if(data.length == 1) return message.reply({embeds:[buildEmbed]});
 
 		const buttons = data.map((builds, dindex) => {
@@ -131,7 +124,9 @@ module.exports = class GenshinUtils {
 		});
 
 		const row = new MessageActionRow().addComponents(...buttons);
-		const msg = await message.reply({embeds: [buildEmbed], components: [row]});
+
+		const msg = await this.isInteraction(message, [buildEmbed], [row]);
+
 		const collector = msg.createMessageComponentCollector({
 			componentType: 'BUTTON',
 			time: 5 * 60 * 1000
@@ -155,8 +150,7 @@ module.exports = class GenshinUtils {
 		// eslint-disable-next-line no-unused-vars
 		collector?.on('end', async inter => {
 			const buildEmbed = this.getBuildData(character, data[index]);
-			buildEmbed.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
-				.setTimestamp();
+			buildEmbed.shirinFooter(message);
 			msg.edit({
 				embeds: [buildEmbed],
 				components: [
@@ -505,5 +499,19 @@ module.exports = class GenshinUtils {
 			}
 		});
 		return talentarr;
+	}
+
+	/**
+	 * function to check if event is message command or interaction command
+	 * @param {any} message message/interaction event
+	 * @param {array} embed collection of embed in array form
+	 * @param {array} component collection of component in array form
+	 * @returns Message
+	 */
+	async isInteraction(message, embed, component) {
+		const author = message.author;
+		if(author) return await message.reply({embeds: embed, components: component});
+		await message.reply({embeds: embed, components: component});
+		return await message.fetchReply();
 	}
 };

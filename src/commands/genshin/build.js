@@ -82,7 +82,7 @@ module.exports = class CharBuild extends Command {
 		// console.log()
 		const current = builds[char.name.toLowerCase().replace(' ', '_')];
 
-		if (!current) return message.reply('Build Guide not found!');
+		if (!current) return message.reply('Sorry i cant find character build that you\'re looking for');
 
 		const sortedBuild = Object.entries(current.roles).sort((a, b) =>
 			a[1].recommended === b[1].recommended ? 0 : a[1].recommended ? -1 : 1

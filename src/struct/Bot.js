@@ -34,7 +34,7 @@ module.exports = class Bot extends Client {
 	}
 
 	// Load slash commands
-	async loadInteractions(guildId) {
+	async loadInteractions() {
 		const intFile = await sync(resolve('./src/slash/**/*.js'));
 		intFile.forEach((filepath) => {
 			const File = require(filepath);
