@@ -27,7 +27,9 @@ module.exports = class SlashCharBuild extends Interaction {
 		const charstr = interaction.options.getString('name');
 		const elestr = interaction.options.getString('element');
 		if(!charstr) {
-			const charList = genshin.characters('names', {matchCategories:true});
+			const charList = elestr ?
+				genshin.characters(elestr, {matchCategories:true}) : genshin.characters('names', {matchCategories:true});
+			if(!charList || Array.isArray(charList) === false) return interaction.reply({ephemeral:true, content:`Unknown element! i can't categorize based on this element`});
 			const listChunked = [];
 			for(let i = 0; i < charList.length; i += chunksize) {
 				const chunk = charList.slice(i, i + chunksize);

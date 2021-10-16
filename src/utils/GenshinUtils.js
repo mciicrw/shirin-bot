@@ -93,7 +93,7 @@ module.exports = class GenshinUtils {
 		else {
 			const listEmbed = new botEmbed()
 				.setColor(message.guild.me.displayHexColor)
-				.genshinList(list, type);
+				.genshinList(list[0], type);
 
 			return message.reply({embeds: [listEmbed]});
 		}
@@ -280,7 +280,7 @@ module.exports = class GenshinUtils {
 			})
 		);
 
-		const rpl = await message.reply({embeds: [charaEmbed], components: [row]});
+		const rpl = await this.isInteraction(message,[charaEmbed],[row])
 		const collector = rpl.createMessageComponentCollector({
 			componentType: 'SELECT_MENU',
 			time: 5 * 60 * 1000
@@ -294,8 +294,7 @@ module.exports = class GenshinUtils {
 			if(inter.customId === 'charDetailSelect') {
 				selValue = Number(inter.values[0].at(-1));
 				const charaEmbed = new botEmbed()
-					.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
-					.setTimestamp();
+					.shirinFooter(message);
 				if(selValue === 0) charaEmbed.charDetails(character);
 				if(selValue === 1) charaEmbed.charAscend(character);
 				if(selValue === 2) charaEmbed.charConste(character, conste);
@@ -324,8 +323,7 @@ module.exports = class GenshinUtils {
 
 		collector?.on('end', async inter => {
 			const charaEmbed = new botEmbed()
-				.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
-				.setTimestamp();
+				.shirinFooter(message);
 			if(selValue === 0) charaEmbed.charDetails(character);
 			if(selValue === 1) charaEmbed.charAscend(character);
 			if(selValue === 2) charaEmbed.charConste(character, conste);
@@ -350,8 +348,7 @@ module.exports = class GenshinUtils {
 				counter -= 1;
 				const charaEmbed = new botEmbed()
 					.charTalent(character, talentarr[counter])
-					.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
-					.setTimestamp();
+					.shirinFooter(message);
 				bNext.setDisabled(false);
 				if (counter === 0) bPrev.setDisabled(true);
 				const bRow = new MessageActionRow().addComponents([bPrev, bNext]);
@@ -369,8 +366,7 @@ module.exports = class GenshinUtils {
 				counter += 1;
 				const charaEmbed = new botEmbed()
 					.charTalent(character, talentarr[counter])
-					.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
-					.setTimestamp();
+					.shirinFooter(message);
 				bPrev.setDisabled(false);
 				if (counter === talentarr.length - 1) bNext.setDisabled(true);
 				const bRow = new MessageActionRow().addComponents([bPrev, bNext]);
@@ -388,8 +384,7 @@ module.exports = class GenshinUtils {
 		// eslint-disable-next-line no-unused-vars
 		buttonCollector?.on('end', async ind => {
 			const charaEmbed = new botEmbed()
-				.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
-				.setTimestamp();
+				.shirinFooter(message);
 			if(selValue === 0) charaEmbed.charDetails(character);
 			if(selValue === 1) charaEmbed.charAscend(character);
 			if(selValue === 2) charaEmbed.charConste(character, conste);

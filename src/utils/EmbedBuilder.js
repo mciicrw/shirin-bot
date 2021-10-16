@@ -264,3 +264,5 @@ module.exports = class botEmbed extends MessageEmbed {
 		return this;
 	}
 };
+
+// "```fix\nAmber,Bennett,Diluc,Hu Tao,Klee,Xiangling,Xinyan,Yanfei,Yoimiya```"
