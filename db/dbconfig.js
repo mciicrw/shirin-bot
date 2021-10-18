@@ -1,6 +1,16 @@
 const {Sequelize} = require('sequelize');
 
-const pgdb = new Sequelize(process.env.DATABASE_URL);
+const pgdb = new Sequelize(process.env.DATABASE_URL, {
+	dialect: 'postgres',
+	protocol: 'postgres',
+	dialectOptions:{
+		ssl: {
+			require: true,
+			rejectUnauthorized: true
+		}
+	}
+
+});
 
 const checkConnection = () => new Promise((resolve, reject) => {
 	try{

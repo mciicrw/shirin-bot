@@ -2,7 +2,7 @@
 const {checkConnection} = require('../../../db/dbconfig');
 
 module.exports = class CheckConn extends Command {
-    constructor() {
+	constructor() {
 		super({
 			name: "connection",
 			aliases: ["conn", "cc"],
@@ -16,9 +16,9 @@ module.exports = class CheckConn extends Command {
 		});
 	}
 
-    async exec(message,args){
-        const connn = await checkConnection();
-        if(connn === false) return message.reply('error ges');
-        return message.reply('connect ges');
-    }
-}
+	async exec(message, args) {
+		const connn = await checkConnection();
+		if(connn === true) return message.reply('connect ges');
+		return message.reply('error ges');
+	}
+};
