@@ -31,6 +31,30 @@ module.exports = class Bot extends Client {
 		this.utils = new Util(this);
 		this.schedule = new Scheduled(this);
 		this.gutils = new GenshinUtils(this);
+
+		this.database = {};
+		this.guildsData = require('../models/guild');
+		this.database.guilds = new Collection();
+	}
+
+	async findGuild({guildID: guildId}, check) {
+		if (this.database.guilds.get(guildId)) {
+			return check ? this.database.guilds.get(guildId).toJSON() : this.database.guilds.get(guildId);
+		}
+		else {
+			let guildData = check ? await this.guildsData.findOne({where:{discord_id:guildId}, raw:true}) : await this.guildsData.findOne({where:{discord_id:guildId}, raw:true});
+			if (guildData) {
+				if (!check) this.database.guilds.set(guildId, guildData);
+				return guildData;
+			}
+			else {
+				const discord_id = guildId;
+				await this.guildsData.create({discord_id});
+				guildData = this.guildsData.findOne({where:{discord_id:guildId}, raw:true});
+				this.database.guilds.set(guildId, guildData);
+				return check ? guildData.toJSON : guildData;
+			}
+		}
 	}
 
 	// Load slash commands

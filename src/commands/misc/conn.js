@@ -1,5 +1,5 @@
 // const { Message } = require('discord.js');
-const {checkConnection} = require('../../../db/dbconfig');
+const {checkConnection} = require('../../models/db/dbconfig');
 
 module.exports = class CheckConn extends Command {
 	constructor() {
