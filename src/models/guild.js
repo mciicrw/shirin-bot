@@ -1,7 +1,7 @@
 const {pgdb} = require('./db/dbconfig');
 const {DataTypes} = require('sequelize');
 
-module.exports = pgdb.define('discord', {
+module.exports = pgdb.define('discord_prod', {
 	discord_id: {
 		type: DataTypes.BIGINT,
 		allowNull: false
