@@ -9,7 +9,7 @@ const {Op} = require('sequelize');
 module.exports = class Scheduled {
 
 	async dailyRotation(client) {
-		cron.schedule('21 10 * * *', async () => {
+		cron.schedule('0 3 * * *', async () => {
 			const getLogCh = await MDiscord.findAll({
 				attributes: ['daily_channel'],
 				where: {
