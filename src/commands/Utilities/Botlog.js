@@ -1,4 +1,3 @@
-
 const fs = require('fs').promises;
 const { prefix } = require('../../../config.json');
 
@@ -7,16 +6,16 @@ module.exports = class BotLog extends Command {
 
 	constructor() {
 		super({
-            name: "botlog",
-            aliases: ["logging"],
-            description: "Change bot log channel",
-            usage: "",
-            category: "Utilities",
-            ownerOnly: false,
-            cooldown: 3000,
-            memberPerms: ["MANAGE_CHANNELS", "ADMINISTRATOR"],
-            clientPerms: [],
-        });
+			name: "botlog",
+			aliases: ["logging"],
+			description: "Change bot log channel",
+			usage: "",
+			category: "Utilities",
+			ownerOnly: false,
+			cooldown: 3000,
+			memberPerms: ["MANAGE_CHANNELS", "ADMINISTRATOR"],
+			clientPerms: [],
+		});
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -32,8 +31,9 @@ module.exports = class BotLog extends Command {
 				obj.log = newChan;
 
 				await fs.writeFile('config.json', JSON.stringify(obj, null, 2));
-			} catch (err) {
-				this.client.logger.error(err,{tag: 'Commands'});
+			}
+			catch (err) {
+				this.client.logger.error(err, {tag: 'Commands'});
 				message.channel.send('There was an error trying to change this bot log channel');
 				throw err;
 			}
