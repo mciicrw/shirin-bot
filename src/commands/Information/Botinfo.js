@@ -21,7 +21,6 @@ module.exports = class BotInfo extends Command {
 	}
 
 	exec(message) {
-		console.log()
 		const core = os.cpus()[0];
 		const botEmbed = new MessageEmbed()
 			.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true }))
