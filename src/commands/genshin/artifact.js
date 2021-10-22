@@ -1,6 +1,6 @@
 const genshin = require('genshin-db');
 const botEmbed = require('../../utils/EmbedBuilder');
-const { arteDomain, raritymoji } = require('../../assets/data/ObjectCollection');
+// const { arteDomain, raritymoji } = require('../../assets/data/ObjectCollection');
 
 module.exports = class Arte extends Command {
 	constructor() {

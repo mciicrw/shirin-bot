@@ -47,7 +47,6 @@ module.exports = class SlashWp extends Interaction {
 
 			const wpEmbed = new botEmbed()
 				.setThumbnail(weapon.images.awakenicon)
-				.setColor(interaction.guild.me.displayHexColor)
 				.weaponEmbed(weapon, baseatk, sub, refine)
 				.shirinFooter(interaction);
 
@@ -69,7 +68,6 @@ module.exports = class SlashWp extends Interaction {
 
 		const wpEmbed = new botEmbed()
 			.setThumbnail(weapon.images.icon)
-			.setColor(interaction.guild.me.displayHexColor)
 			.weaponEmbed(weapon, baseatk, sub, refine)
 			.shirinFooter(interaction);
 

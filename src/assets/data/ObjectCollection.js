@@ -3,9 +3,37 @@
  */
 
 
-const raritymoji = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'];
+// const raritymoji = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'];
 
-const raritycode = ['1★', '2★', '3★', '4★', '5★'];
+const rarity = [
+	{
+		emoji: '⭐',
+		unicode: '1★',
+		color: '#838f99'
+	},
+	{
+		emoji: '⭐⭐',
+		unicode: '2★',
+		color: '#5e966c'
+	},
+	{
+		emoji: '⭐⭐⭐',
+		unicode: '3★',
+		color: '#499fb3'
+	},
+	{
+		emoji: '⭐⭐⭐⭐',
+		unicode: '4★',
+		color: '#b785c9'
+	},
+	{
+		emoji: '⭐⭐⭐⭐⭐',
+		unicode: '5★',
+		color: '#e2aa50'
+	}
+]
+
+// const raritycode = ['1★', '2★', '3★', '4★', '5★'];
 
 const element = {
 	"Cryo": {
@@ -159,4 +187,4 @@ const sevenTalent = [
 ];
 
 
-module.exports = { raritymoji, element, rotationData, arteDomain, sevenTalent };
+module.exports = { rarity, element, rotationData, arteDomain, sevenTalent };
