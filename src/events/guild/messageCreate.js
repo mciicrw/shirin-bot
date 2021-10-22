@@ -21,28 +21,7 @@ module.exports = class messageCreate extends Event {
 		const [cmd, ...args] = message.content.slice(prefix.length).trim().split(/ +/g);
 		const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
 
-		// const args = message.content.slice(this.client.prefix.length).trim().split(/ +/g);
-		// const cmdName = args.shift().toLowerCase();
-		// const cmd = this.client.commands.get(cmdName) || this.client.commands.get(this.client.aliases.get(cmdName));
 		if (command) {
-			// if (cmd.ownerOnly && !this.client.owners.includes(message.author.id)) {
-			// 	return message.reply(`> This command is only for my master !`);
-			// }
-			// const clientCheckPerms = cmd.clientPerms;
-			// if (clientCheckPerms) {
-			// 	const miss = message.channel.permissionsFor(message.guild.me).missing(clientCheckPerms);
-			// 	if (miss.length) return message.reply(`> I'm missing: ${miss.join(', ')}`);
-			// }
-
-			// const memberCheckPerms = cmd.memberPerms;
-			// if (memberCheckPerms) {
-			// 	const miss = message.channel.permissionsFor(message.member).missing(memberCheckPerms);
-			// 	if (miss.length) return message.reply(`> You are missing: ${miss.join(', ')}`);
-			// }
-
-			// if (!this.client.cooldowns.has(cmd.name)) {
-			// 	this.client.cooldowns.set(cmd.name, new Collection());
-			// }
 
 			if(message.guild) {
 				const memberCheck = command.memberPerms;
