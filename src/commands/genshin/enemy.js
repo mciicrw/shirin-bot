@@ -1,13 +1,16 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
 const genshin = require('genshin-db');
+const botEmbed = require('../../utils/EmbedBuilder');
+
+const enemyType =['dummy', 'COMMON', 'ELITE', 'BOSS'];
 
 module.exports = class GenshinEnemies extends Command {
 
 	constructor() {
 		super({
 			name: 'enemy',
-			aliases: ['mob', 'boss'],
+			aliases: ['mob', 'monster'],
 			description: 'Get Enemy List and Details',
 			usage: 'emeny [name]',
 			category: 'Genshin',
@@ -19,6 +22,7 @@ module.exports = class GenshinEnemies extends Command {
 	}
 
 	async exec(message, args) {
+
 		if (args.length == 0) {
 			const enemyList = genshin.enemies('names', { matchCategories: true });
 			const listChunked = [];
@@ -28,7 +32,18 @@ module.exports = class GenshinEnemies extends Command {
 			}
 			return this.client.gutils.sendListEmbed(message, listChunked, 'Enemie');
 		}
-		return message.reply('it works!');
+
+		const enemyDetails = genshin.enemies(args.join(' '), {matchAliases:true});
+		if(!enemyDetails || Array.isArray(enemyDetails)) return message.reply(`Sorry, i can't find enemy that you're looking for`);
+
+		const enemyRarity = enemyType.indexOf(enemyDetails.type);
+
+		const enemyEmbed = new botEmbed()
+			.genshinEnemyEmbed(enemyDetails, enemyRarity)
+			.shirinFooter(message);
+
+
+		return message.reply({embeds:[enemyEmbed]});
 	}
 
 };

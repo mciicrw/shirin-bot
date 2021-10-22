@@ -231,7 +231,7 @@ module.exports = class botEmbed extends MessageEmbed {
 	 * @returns Message Embed
 	 */
 	artefactEmbed(type, details, piece, image) {
-		this.color = emobjects.rarity[details.rarity[details.rarity.length - 1] - 1].color
+		this.color = emobjects.rarity[details.rarity[details.rarity.length - 1] - 1].color;
 		this.title = `${details.name} | ${piece.name}`;
 		this.description = [
 			piece.description,
@@ -253,8 +253,21 @@ module.exports = class botEmbed extends MessageEmbed {
 		return this;
 	}
 
-	genshinEnemyEmbed(){
-
+	/**
+	 * genshin impact enemy embed builder
+	 * @param {Object.<string, any} enemy enemy data from genshin-db
+	 * @param {number} type number type parsed from array index
+	 */
+	genshinEnemyEmbed(enemy, type) {
+		this.thumbnail = {url: `https://res.cloudinary.com/genshin/image/upload/sprites/${enemy.images.nameicon}.png`};
+		this.title = enemy.name + ' | ' + enemy.specialname;
+		this.description = enemy.description;
+		this.fields = [
+			{name:'Enemy Type', value: enemy.type, inline:true},
+			{name:'Enemy Category', value: enemy.category, inline:true}
+		];
+		this.color = emobjects.rarity[type].color;
+		return this;
 	}
 
 	splitFields(contentOrTitle, rawContent) {
