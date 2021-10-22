@@ -161,7 +161,7 @@ module.exports = class botEmbed extends MessageEmbed {
 
 	/**
 	 * Character details embed builder
-	 * @param {any}} character character data collected from genshin0db
+	 * @param {any} character character data collected from genshin-db
 	 * @returns MessageEmbed
 	 */
 	charDetails(character) {
@@ -194,6 +194,12 @@ module.exports = class botEmbed extends MessageEmbed {
 		return this;
 	}
 
+	/**
+	 * Genshin character talent embed
+	 * @param {genshindb.character} character genshin-db character object
+	 * @param {genshindb.talent} talent genshin-db talent object
+	 * @returns {discordjs.MessageEmbed} Message Embed object
+	 */
 	charTalent(character, talent) {
 		const type = talent.type.slice(0, -1);
 		this.addGenshinHeader(character);
@@ -212,6 +218,28 @@ module.exports = class botEmbed extends MessageEmbed {
 				{name: talent.name, value: talent.effect, inline: false}
 			];
 		}
+		return this;
+	}
+
+	artefactEmbed(type, details, piece, image) {
+		this.title = `${details.name} | ${piece.name}`;
+		this.description = [
+			piece.description,
+			emobjects.raritymoji[details.rarity[details.rarity.length - 1] - 1]
+		].join('\n');
+		if (details.name.includes('Prayers')) {
+			this.fields = [
+				{name:'1 Set Effect', value: details['1pc'], inline:true},
+			];
+		}
+		else {
+			this.fields = [
+				{name:'2 Set Effect', value: details['2pc'], inline:true},
+				{name:'4 Set Effect', value: details['4pc'], inline:true}
+			];
+		}
+		this.addField('Location', details.source, false);
+		this.thumbnail = { url:image[type]};
 		return this;
 	}
 
@@ -256,6 +284,11 @@ module.exports = class botEmbed extends MessageEmbed {
 		return this;
 	}
 
+	/**
+	 * FOOOOOOTER
+	 * @param {discordjs.message} message discordjs message event
+	 * @returns {discordjs.MessageEmbed} discordjs message embed
+	 */
 	shirinFooter(message) {
 		this.footer = message.author ?
 			{text: `Requested by ${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true })} : {text: `Requested by ${message.user.username}`, iconURL: message.user.displayAvatarURL({ dynamic: true })};

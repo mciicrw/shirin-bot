@@ -3,11 +3,18 @@ const botEmbed = require('./EmbedBuilder');
 const weapons = require('../assets/data/weapons');
 const { prefix, devPrefix} = require('../../config.json');
 const genshin = require('genshin-db');
-const { sevenTalent } = require('../assets/data/ObjectCollection');
+const { sevenTalent, arteDomain } = require('../assets/data/ObjectCollection');
 
 const prf = process.env.DEPLOY === 'DEV' ? devPrefix : prefix;
 
 module.exports = class GenshinUtils {
+
+
+	async getPrefix(message) {
+		const data = {};
+		data.guild = await this.client.findGuild({guildID: message.guild.id});
+		return data.guild?.prefix;
+	}
 
 	/**
      * send list embed
@@ -280,7 +287,7 @@ module.exports = class GenshinUtils {
 			})
 		);
 
-		const rpl = await this.isInteraction(message,[charaEmbed],[row])
+		const rpl = await this.isInteraction(message, [charaEmbed], [row]);
 		const collector = rpl.createMessageComponentCollector({
 			componentType: 'SELECT_MENU',
 			time: 5 * 60 * 1000
@@ -507,5 +514,112 @@ module.exports = class GenshinUtils {
 		if(author) return await message.reply({embeds: embed, components: component});
 		await message.reply({embeds: embed, components: component});
 		return await message.fetchReply();
+	}
+
+	async artifactHelper(message, artifact) {
+		const arteArr = Object.entries(artifact);
+		const arteList = arteArr.slice(4, -2);
+		const imgList = arteArr.slice(-2, -1)[0][1];
+		const arteSource = arteDomain.filter(domain => domain.list.find(arte => arte === artifact.name));
+		let arteindex = 0;
+		if (arteList.length > 1) {
+			const arteDetails = {
+				name: artifact.name,
+				rarity: artifact.rarity,
+				'4pc': artifact['4pc'],
+				'2pc': artifact['2pc'],
+				source: arteSource[0].name
+			};
+			const arteEmbed = new botEmbed()
+				.setColor(message.guild.me.displayHexColor)
+				.artefactEmbed(arteList[arteindex][0], arteDetails, arteList[arteindex][1], imgList)
+				.shirinFooter(message);
+
+			const bPrev =
+                new MessageButton({
+                	customId: 'arte-prev',
+                	label: 'Prev',
+                	style: 'SECONDARY'
+                });
+			const bNext =
+                new MessageButton({
+                	customId: 'arte-next',
+                	label: 'Next',
+                	style: 'SECONDARY'
+                });
+
+			if (arteindex === 0) bPrev.setDisabled(true);
+
+			const row = new MessageActionRow().addComponents([bPrev, bNext]);
+			const repl = await this.isInteraction(message, [arteEmbed], [row]);
+			const collector = repl.createMessageComponentCollector({
+				componentType: 'BUTTON',
+				time: 5 * 60 * 1000
+			});
+
+			collector?.on('collect', async interact => {
+				if (interact.customId === 'arte-prev') {
+					arteindex -= 1;
+					const arteEmbed = new botEmbed()
+						.setColor(message.guild.me.displayHexColor)
+						.artefactEmbed(arteList[arteindex][0], arteDetails, arteList[arteindex][1], imgList)
+						.shirinFooter(message);
+					if(arteindex === arteList.length - 2) bNext.setDisabled(false);
+					if(arteindex === 0) bPrev.setDisabled(true);
+					const row = new MessageActionRow().addComponents([bPrev, bNext]);
+					await interact.update({embeds: [arteEmbed], components: [row]});
+				}
+				if (interact.customId === 'arte-next') {
+					arteindex += 1;
+					const arteEmbed = new botEmbed()
+						.setColor(message.guild.me.displayHexColor)
+						.artefactEmbed(arteList[arteindex][0], arteDetails, arteList[arteindex][1], imgList)
+						.shirinFooter(message);
+					if(arteindex === arteList.length - 1) bNext.setDisabled(true);
+					if(arteindex === 1) bPrev.setDisabled(false);
+					const row = new MessageActionRow().addComponents([bPrev, bNext]);
+					await interact.update({embeds: [arteEmbed], components: [row]});
+				}
+			});
+
+			collector?.on('end', async interact => {
+				const arteEmbed = new botEmbed()
+					.setColor(message.guild.me.displayHexColor)
+					.artefactEmbed(arteList[arteindex][0], arteDetails, arteList[arteindex][1], imgList)
+					.shirinFooter(message);
+
+				repl.edit({
+					embeds: [arteEmbed],
+					components: [
+						new MessageActionRow().addComponents(
+							new MessageButton({
+								customId: 'arte-stop',
+								label: `type ${prf}arte again to refresh`,
+								style: 'SECONDARY',
+								disabled: true
+							})
+						)
+					]
+				});
+			});
+
+		}
+		else {
+			const arteDetails = {
+				name: artifact.name,
+				rarity: artifact.rarity,
+				'1pc': artifact['1pc'],
+				source: arteSource[0].name
+			};
+
+			const circletArr = arteArr.slice(-3, -2);
+
+			const arteEmbed = new botEmbed()
+				.setColor(message.guild.me.displayHexColor)
+				.artefactEmbed(circletArr[0][0], arteDetails, circletArr[0][1], imgList)
+				.shirinFooter(message);
+
+			return message.reply({embeds: [arteEmbed]});
+		}
 	}
 };
