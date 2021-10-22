@@ -30,33 +30,6 @@ module.exports = class SlashArtifact extends Interaction {
 		const arteDetails = genshin.artifacts(artestr, {matchAliases:true});
 		if(!arteDetails || Array.isArray(arteDetails)) return interaction.reply({ephemeral:true, content:`Sorry i cant find artifacts that you're looking for`});
 
-		const arteSource = arteDomain.filter(domain => domain.list.find(arte => arte === arteDetails.name));
-
-		if (arteDetails.name.includes('Prayers')) {
-			const arteEmbed = new botEmbed()
-				.setColor(interaction.guild.me.displayHexColor)
-				.setTitle(arteDetails.name)
-				.setThumbnail(arteDetails.images.circlet)
-				.setDescription(raritymoji[arteDetails.rarity[arteDetails.rarity.length - 1] - 1])
-				.addFields([
-					{name:'1 Set Effect', value: arteDetails['1pc'], inline:true},
-					{name:'Location', value: arteSource[0].name, inline:false}
-				])
-				.shirinFooter(interaction);
-			return interaction.reply({embeds:[arteEmbed]});
-		}
-
-		const arteEmbed = new botEmbed()
-			.setColor(interaction.guild.me.displayHexColor)
-			.setTitle(arteDetails.name)
-			.setThumbnail(arteDetails.images.flower)
-			.setDescription(raritymoji[arteDetails.rarity[arteDetails.rarity.length - 1] - 1])
-			.addFields([
-				{name:'2 Set Effect', value: arteDetails['2pc'], inline:true},
-				{name:'4 Set Effect', value: arteDetails['4pc'], inline:true},
-				{name:'Location', value: arteSource[0].name, inline:false}
-			])
-			.shirinFooter(interaction);
-		return interaction.reply({embeds:[arteEmbed]});
+		return this.client.gutils.artifactHelper(interaction, arteDetails);
 	}
 };
