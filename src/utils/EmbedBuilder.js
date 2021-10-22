@@ -7,7 +7,7 @@ const emobjects = require('../assets/data/ObjectCollection');
 module.exports = class botEmbed extends MessageEmbed {
 	/**
      * Genshin character details embed
-     * @param {any} character character object
+     * @param {Object.<string, any>} character character object
      * @returns MessageEmbed
      */
 	addGenshinHeader(character) {
@@ -19,12 +19,12 @@ module.exports = class botEmbed extends MessageEmbed {
 		this.thumbnail = {url: charDetails.images.icon};
 		if(emobjects.element[charDetails.element]) {
 			this.description = [
-				`${emobjects.element[charDetails.element].emoji} | ${emobjects.raritymoji[charDetails.rarity - 1]}`,
+				`${emobjects.element[charDetails.element].emoji} | ${emobjects.rarity[charDetails.rarity - 1].emoji}`,
 				charDetails.description
 			].join('\n');
 		}
 		this.description = [
-			emobjects.raritymoji[charDetails.rarity - 1],
+			emobjects.rarity[charDetails.rarity - 1].emoji,
 			charDetails.description
 		].join('\n');
 
@@ -68,7 +68,7 @@ module.exports = class botEmbed extends MessageEmbed {
 
 	/**
      * List embed for genshin
-     * @param {array} listarr list array from genshin-db search result
+     * @param {Array.<string>} listarr list array from genshin-db search result
      * @param {string} type list type, can be weapon, character, or artifact
      * @returns MessageEmbed
      */
@@ -88,18 +88,19 @@ module.exports = class botEmbed extends MessageEmbed {
 
 	/**
      * Embed builder for genshin weapon command
-     * @param {any} weapon weapon object from genshin-db
+     * @param {Object.<string, any>} weapon weapon object from genshin-db
      * @param {string} baseatk calculated weapon baseatk
      * @param {string} sub calculated weapon substat
      * @param {string} refine formatted refinement string
      * @returns MessageEmbed
      */
 	weaponEmbed(weapon, baseatk, sub, refine) {
+		this.color = emobjects.rarity[weapon.rarity - 1 ].color;
 		if (weapon.rarity <= 2) {
 			this.title = weapon.name;
 			this.description = [
 				weapon.description,
-				emobjects.raritymoji[weapon.rarity - 1]
+				emobjects.rarity[weapon.rarity - 1].emoji
 			].join('\n');
 			this.fields = [
 				{name: "Weapon Type", value: weapon.weapontype, inline:true},
@@ -113,7 +114,7 @@ module.exports = class botEmbed extends MessageEmbed {
 		this.title = weapon.name;
 		this.description = [
 			weapon.description,
-			emobjects.raritymoji[weapon.rarity - 1]
+			emobjects.rarity[weapon.rarity - 1].emoji
 		].join('\n');
 		this.fields = [
 			{name: "Weapon Type", value: weapon.weapontype, inline:true},
@@ -129,8 +130,8 @@ module.exports = class botEmbed extends MessageEmbed {
 
 	/**
 	 * Character constellation embed builder
-	 * @param {any} character character data collected from genshin-db
-	 * @param {array} conste consteallaction array collected from genshin-db
+	 * @param {Object.<string, any>} character character data collected from genshin-db
+	 * @param {Array.<string,any>} conste consteallaction array collected from genshin-db
 	 * @returns MessageEmbed
 	 */
 	charConste(character, conste) {
@@ -144,7 +145,7 @@ module.exports = class botEmbed extends MessageEmbed {
 
 	/**
 	 * Character ascension embed builder
-	 * @param {any} character character data collected from genshin-db
+	 * @param {Object.<string, any>} character character data collected from genshin-db
 	 * @returns MessageEmbed
 	 */
 	charAscend(character) {
@@ -161,7 +162,7 @@ module.exports = class botEmbed extends MessageEmbed {
 
 	/**
 	 * Character details embed builder
-	 * @param {any} character character data collected from genshin-db
+	 * @param {Object.<string, any>} character character data collected from genshin-db
 	 * @returns MessageEmbed
 	 */
 	charDetails(character) {
@@ -196,9 +197,9 @@ module.exports = class botEmbed extends MessageEmbed {
 
 	/**
 	 * Genshin character talent embed
-	 * @param {genshindb.character} character genshin-db character object
-	 * @param {genshindb.talent} talent genshin-db talent object
-	 * @returns {discordjs.MessageEmbed} Message Embed object
+	 * @param {Object.<string, any>} character genshin-db character object
+	 * @param {Object.<string, any>} talent genshin-db talent object
+	 * @returns Message Embed object
 	 */
 	charTalent(character, talent) {
 		const type = talent.type.slice(0, -1);
@@ -221,11 +222,20 @@ module.exports = class botEmbed extends MessageEmbed {
 		return this;
 	}
 
+	/**
+	 * Genshin Artifact embed builder
+	 * @param {string} type artifact type, flower, plume, sands etc.
+	 * @param {Object.<string,string>} details artifact details built as an object
+	 * @param {Object.<string,string>} piece piece details object, retrieved from genshin-db
+	 * @param {Object.<string,string>} image image list object form genshin-db
+	 * @returns Message Embed
+	 */
 	artefactEmbed(type, details, piece, image) {
+		this.color = emobjects.rarity[details.rarity[details.rarity.length - 1] - 1].color
 		this.title = `${details.name} | ${piece.name}`;
 		this.description = [
 			piece.description,
-			emobjects.raritymoji[details.rarity[details.rarity.length - 1] - 1]
+			emobjects.rarity[details.rarity[details.rarity.length - 1] - 1].emoji
 		].join('\n');
 		if (details.name.includes('Prayers')) {
 			this.fields = [
@@ -241,6 +251,10 @@ module.exports = class botEmbed extends MessageEmbed {
 		this.addField('Location', details.source, false);
 		this.thumbnail = { url:image[type]};
 		return this;
+	}
+
+	genshinEnemyEmbed(){
+
 	}
 
 	splitFields(contentOrTitle, rawContent) {
@@ -286,8 +300,8 @@ module.exports = class botEmbed extends MessageEmbed {
 
 	/**
 	 * FOOOOOOTER
-	 * @param {discordjs.message} message discordjs message event
-	 * @returns {discordjs.MessageEmbed} discordjs message embed
+	 * @param {dObject.<string, any>} message discordjs message event
+	 * @returns discordjs message embed
 	 */
 	shirinFooter(message) {
 		this.footer = message.author ?

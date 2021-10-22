@@ -18,8 +18,8 @@ module.exports = class GenshinUtils {
 
 	/**
      * send list embed
-     * @param {any} message discord message event
-     * @param {array} list genshin array list
+     * @param {Object.<string, any>} message discord message event
+     * @param {Array.<string>} list genshin array list
      * @param {string} type list type string
      */
 	async sendListEmbed(message, list, type) {
@@ -108,9 +108,9 @@ module.exports = class GenshinUtils {
 
 	/**
      * genshin build recommendation embed
-	 * @param {Message} message discordjs message event
-     * @param {any} character character data from genshin-db
-     * @param {array} data sorted character build data
+	 * @param {Object.<string, any>} message discordjs message event
+     * @param {Object.<string, string>} character character data from genshin-db
+     * @param {Array.<Array.<string,any>>} data sorted character build data
      */
 	async buildEmbed(message, character, data) {
 		let index = 0;
@@ -174,8 +174,9 @@ module.exports = class GenshinUtils {
 
 	/**
 	 * embed builder for genshin build, idk why this here
-	 * @param {any} character character data from genshin-db
-	 * @param {any} displayData selected build data
+	 * @param {Object.<string, any>} message discordjs message event
+	 * @param {Object.<string, any>} character character data from genshin-db
+	 * @param {Array.<string,any>} displayData selected build data
 	 * @returns MessageEmbed
 	 */
 	getBuildData(message, character, displayData) {
@@ -231,9 +232,9 @@ module.exports = class GenshinUtils {
 
 	/**
 	 * genshin character details main function
-	 * @param {Message} message discordjs message event
+	 * @param {Object.<string, any>} message discordjs message event
 	 * @param {string} charname genshin character name
-	 * @param {string} element string element type
+	 * @param {?string} element string element type
 	 * @returns Message
 	 */
 	async getCharDetails(message, charname, element) {
@@ -415,7 +416,7 @@ module.exports = class GenshinUtils {
 
 	/**
 	 * Genshin char talent count checker
-	 * @param {any} talent talent object from genshin-db
+	 * @param {Object.<string, any>} talent talent object from genshin-db
 	 * @returns Array
 	 */
 	getCharTalent(talent) {
@@ -433,10 +434,10 @@ module.exports = class GenshinUtils {
 
 	/**
 	 * Genshin char talent array builder
-	 * @param {any} chartalent talent object from genshin-db
-	 * @param {array} talent combat and passive tallent array
+	 * @param {Object.<string, any>} chartalent talent object from genshin-db
+	 * @param {Array.<any>} talent combat and passive tallent array
 	 * @param {string} type talent type, can be active or any string
-	 * @returns Array
+	 * @returns {Array.<any>}
 	 */
 	pussshh(chartalent, talent, type) {
 		const activeCount = type === 'active' ? 4 : 3;
@@ -504,9 +505,9 @@ module.exports = class GenshinUtils {
 
 	/**
 	 * function to check if event is message command or interaction command
-	 * @param {any} message message/interaction event
-	 * @param {array} embed collection of embed in array form
-	 * @param {array} component collection of component in array form
+	 * @param {Object.<string, any>} message message/interaction event
+	 * @param {Array.<amy>} embed collection of embed in array form
+	 * @param {Array.<any>} component collection of component in array form
 	 * @returns Message
 	 */
 	async isInteraction(message, embed, component) {
@@ -516,6 +517,11 @@ module.exports = class GenshinUtils {
 		return await message.fetchReply();
 	}
 
+	/**
+	 * Genshin artifact builder
+	 * @param {Object.<string, any>} message discordjs message event
+	 * @param {Object.<string, any>} artifact artifact data from genshin-db
+	 */
 	async artifactHelper(message, artifact) {
 		const arteArr = Object.entries(artifact);
 		const arteList = arteArr.slice(4, -2);
@@ -615,7 +621,6 @@ module.exports = class GenshinUtils {
 			const circletArr = arteArr.slice(-3, -2);
 
 			const arteEmbed = new botEmbed()
-				.setColor(message.guild.me.displayHexColor)
 				.artefactEmbed(circletArr[0][0], arteDetails, circletArr[0][1], imgList)
 				.shirinFooter(message);
 
