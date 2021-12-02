@@ -6,7 +6,7 @@ module.exports = pgdb.define('discord_prod', {
 		type: DataTypes.BIGINT,
 		allowNull: false
 	},
-    owner_id: {
+	owner_id: {
 		type: DataTypes.BIGINT
 	},
 	mod_log_channel: {

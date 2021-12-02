@@ -5,10 +5,10 @@ module.exports = class LogTest extends Command {
 		super({
 			name: "dailych",
 			aliases: ["dch"],
-			description: "Get Artifact List and Details",
-			usage: "artifact [name]",
+			description: "Set daily rotation channel",
+			usage: "dailych [name]",
 			category: "Genshin",
-			ownerOnly: true,
+			ownerOnly: false,
 			cooldown: 3000,
 			memberPerms: [],
 			clientPerms: [],
